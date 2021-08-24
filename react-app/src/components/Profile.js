@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function User() {
-  const [user, setUser] = useState({});
-  const { userId } = useParams();
+function Profile(user) {
 
   useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [userId]);
+
+  }, [dispatch]);
 
   if (!user) {
     return null;
@@ -22,6 +13,9 @@ function User() {
 
   return (
     <div>
+        <div className='img-container'>
+            <img className='profile-img' src={user.img}></img>
+        </div>
       <ul>
         <li>
           <strong>User Id</strong> {userId}
@@ -36,4 +30,4 @@ function User() {
     </div>
   );
 }
-export default User;
+export default Profile;
