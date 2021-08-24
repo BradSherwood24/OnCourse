@@ -5,7 +5,7 @@ import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -54,8 +54,8 @@ const SignUpForm = () => {
         <input
           type='text'
           name='username'
-          onChange={updateUsername}
-          value={username}
+          onChange={e => setFullName(e.target.value)}
+          value={fullName}
         ></input>
       </div>
       <div>
