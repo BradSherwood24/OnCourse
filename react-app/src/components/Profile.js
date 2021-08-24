@@ -1,33 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import './Profile.css'
 
-function Profile(user) {
+function Profile({ user }) {
+    const dispatch = useDispatch()
 
-  useEffect(() => {
+    useEffect(() => {
 
-  }, [dispatch]);
+    }, [dispatch]);
 
-  if (!user) {
-    return null;
-  }
+    if (!user) {
+        return null;
+    }
 
-  return (
-    <div>
-        <div className='img-container'>
-            <img className='profile-img' src={user.img}></img>
+    return (
+        <div className='profile'>
+            <h2>profile</h2>
+            <div className='img-container'>
+                <img className='profile-img' src={user.img}></img>
+            </div>
+            <ul>
+                <li>
+                    <strong>User Id</strong> {user.id}
+                </li>
+                <li>
+                    <strong>Name</strong> {user.full_name}
+                </li>
+                <li>
+                    <strong>Email</strong> {user.email}
+                </li>
+            </ul>
         </div>
-      <ul>
-        <li>
-          <strong>User Id</strong> {userId}
-        </li>
-        <li>
-          <strong>Username</strong> {user.username}
-        </li>
-        <li>
-          <strong>Email</strong> {user.email}
-        </li>
-      </ul>
-    </div>
-  );
+    );
 }
 export default Profile;

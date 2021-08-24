@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import 
+import Profile from '../Profile';
 
 
 function Dashboard() {
@@ -16,9 +16,12 @@ function Dashboard() {
     if (!user) history.push('/login')
 
     return (
-        <div>
-
-        </div>
+        <>
+            <h1>{user.full_name}'s dashboard</h1>
+            <div>
+                <Profile user={user} />
+            </div>
+        </>
     );
 }
 export default Dashboard;
