@@ -16,12 +16,12 @@ function Dashboard() {
     if (!user) history.push('/login')
 
     return (
-        <>
+        <div>
             <h1>{user.full_name}'s dashboard</h1>
             <div>
                 <Profile user={user} />
             </div>
-        </>
+        </div>
     );
 }
 export default Dashboard;
