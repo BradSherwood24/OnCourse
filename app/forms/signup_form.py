@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 
@@ -12,16 +12,28 @@ def user_exists(form, field):
         raise ValidationError('Email address is already in use.')
 
 
-def username_exists(form, field):
+def full_name_exists(form, field):
     # Checking if username is already in use
-    username = field.data
-    user = User.query.filter(User.username == username).first()
+    full_name = field.data
+    user = User.query.filter(User.full_name == full_name).first()
     if user:
-        raise ValidationError('Username is already in use.')
+        raise ValidationError('name is already in use.')
 
 
 class SignUpForm(FlaskForm):
-    username = StringField(
-        'username', validators=[DataRequired(), username_exists])
+    full_name = StringField(
+        'full_name', validators=[DataRequired(), full_name_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired()])
+    home_airport = StringField('home_airport', validators=[DataRequired()])
+    total_time = IntegerField('total_time', validators=[DataRequired()])
+    img = StringField('img')
+    is_IR = BooleanField('is_IR')
+    is_CSEL = BooleanField('is_CSEL')
+    is_CMEL = BooleanField('is_CMEL')
+    is_ATP = BooleanField('is_ATP')
+    is_CFI = BooleanField('is_CFI')
+    is_CFII = BooleanField('is_CFII')
+    is_MEI = BooleanField('is_MEI')
+    is_complex = BooleanField('is_complex')
+    is_performance = BooleanField('is_performance')
