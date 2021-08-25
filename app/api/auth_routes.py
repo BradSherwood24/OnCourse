@@ -86,6 +86,18 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+@auth_routes.route('/delete/<int:id>', methods=['DELETE'])
+def delete(id):
+    """
+    Deletes a user and logs them out
+    """
+    user = User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    logout_user()
+    return {'message': 'User logged out'}
+
+
 @auth_routes.route('/unauthorized')
 def unauthorized():
     """
