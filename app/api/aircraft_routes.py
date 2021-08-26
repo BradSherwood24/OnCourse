@@ -23,7 +23,6 @@ def aircraft(id):
 
 @aircraft_routes.route('/', methods=['POST'])
 def aircraftPost():
-  print('IN ROUTE~!~~~~!!!!!!!')
   form = AircraftForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -55,6 +54,7 @@ def aircraftPost():
       seats=form.data['seats'],
       poh=form.data['poh']
     )
+    print('AIRCRAFT NAME', aircraft.name)
 
     db.session.add(aircraft)
     db.session.commit()

@@ -7,7 +7,7 @@ dr = [DataRequired()]
 
 class AircraftForm(FlaskForm):
   user_id = IntegerField('user_id', validators=[DataRequired()])
-  price = DecimalField('price', validators=[DataRequired()])
+  price = IntegerField('price', validators=[DataRequired()])
   manufacturer = StringField('manufacturer', validators=[DataRequired()])
   name = StringField('name', validators=[DataRequired()])
   description = StringField('description', validators=[DataRequired()])
@@ -25,9 +25,9 @@ class AircraftForm(FlaskForm):
   need_performance = BooleanField('need_performance')
   airport = StringField('airport', validators=[DataRequired()])
   type = StringField('type', validators=[DataRequired()])
-  gph = DecimalField('gph', validators=[DataRequired()])
-  fuel_capacity = DecimalField('fuel_capacity', validators=[DataRequired()])
-  cruise_speed = DecimalField('cruise_speed', validators=[DataRequired()])
-  usable_load = DecimalField('usable_load', validators=[DataRequired()])
+  gph = IntegerField('gph', validators=[DataRequired()])
+  fuel_capacity = IntegerField('fuel_capacity', validators=[DataRequired()])
+  cruise_speed = IntegerField('cruise_speed', validators=[DataRequired()])
+  usable_load = IntegerField('usable_load', validators=[DataRequired()])
   seats = IntegerField('seats', validators=[DataRequired()])
   poh = StringField('poh')
