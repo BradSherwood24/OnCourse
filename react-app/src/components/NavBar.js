@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
-import logo from '../images/OnCourse_Logo_White.png';
+import logo from '../images/OnCourse_logo2.png';
 import './Navbar.css'
 
 
@@ -12,12 +12,12 @@ const NavBar = () => {
     return (
         <header>
             {current_user &&
-                <Link to='/dashboard'>
+                <Link className='logoDiv' to='/dashboard'>
                     <img className='logo' src={logo} alt='logo-main'></img>
                 </Link>
             }
             {!current_user &&
-                <Link to='/'>
+                <Link to='/login'>
                     <img className='logo' src={logo} alt='logo-main-alt'></img>
                 </Link>
             }
