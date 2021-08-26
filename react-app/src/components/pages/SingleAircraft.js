@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { logout } from '../store/session';
+import { logout } from '../../store/session';
 import { useParams } from 'react-router-dom';
 
-function User() {
+function SingleAircraft() {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const { userId } = useParams();
@@ -23,18 +23,9 @@ function User() {
     return null;
   }
 
-  const deleteUser = async () => {
-    await fetch(`/api/auth/delete/${userId}`, {
-      method: 'DELETE'
-    })
-    dispatch(logout())
-  }
 
   return (
     <ul>
-      <button className='delete_user_button' onClick={deleteUser}>
-        Delete
-      </button>
       <li>
         <strong>User Id</strong> {userId}
       </li>
@@ -47,4 +38,4 @@ function User() {
     </ul>
   );
 }
-export default User;
+export default SingleAircraft;

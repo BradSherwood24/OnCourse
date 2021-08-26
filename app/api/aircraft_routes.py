@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Aircraft, db
 from app.forms import AircraftForm
+import simplejson as json
 
 aircraft_routes = Blueprint('aircraft', __name__)
 
@@ -18,7 +19,7 @@ def aircraft_all():
 @login_required
 def aircraft(id):
     aircrafts = Aircraft.query.filter(Aircraft.user_id == id).all()
-    return {'aircraft': [aircraft.to_dict() for aircraft in aircrafts]}
+    return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
 
 
 @aircraft_routes.route('/', methods=['POST'])
@@ -59,5 +60,5 @@ def aircraftPost():
     db.session.add(aircraft)
     db.session.commit()
     print('inside validation p', aircraft.to_dict())
-    return {'aircraft': [aircraft.to_dict()]}
+    return json.dumps({'aircraft': [aircraft.to_dict()]})
   return {'errors': [form.errors]}

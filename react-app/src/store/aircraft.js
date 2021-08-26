@@ -132,7 +132,6 @@ const aircraftReducer = (state = initialState, action) => {
       })
       return newState
     case SET_AIRCRAFTS:
-      newState = {}
       action.aircraft.aircraft.forEach(air => {
         newState[air.id] = air
       })

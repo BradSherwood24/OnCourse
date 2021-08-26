@@ -5,7 +5,7 @@ class Aircraft(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,  db.ForeignKey('users.id'), nullable=False)
-    price = db.Column(db.Numeric(6,2))
+    price = db.Column(db.Integer)
     manufacturer = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(100), nullable=False)
