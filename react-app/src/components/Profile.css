@@ -1,0 +1,16 @@
+.profile {
+    width: 300px;
+    margin-left: 20px;
+    border: 2px solid black;
+    padding: 15px;
+    padding-top: 0px;
+}
+
+.img-container {
+    width: 100%;
+}
+
+.profile-img {
+    width: 150px;
+
+}
