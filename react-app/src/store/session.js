@@ -24,7 +24,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +40,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -70,19 +70,31 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (fullName, email, password, homeAirport, img, totalTime, complex, performance, IR, CSEL, CMEL, ATP, CFI, CFII, MEI) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      username,
+      full_name:fullName,
       email,
       password,
+      home_airport:homeAirport,
+      img,
+      total_time:totalTime,
+      is_complex:complex,
+      is_performance:performance,
+      is_IR:IR,
+      is_CSEL:CSEL,
+      is_CMEL:CMEL,
+      is_ATP:ATP,
+      is_CFI:CFI,
+      is_CFII:CFII,
+      is_MEI:MEI
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))

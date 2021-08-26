@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './auth.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -18,6 +19,14 @@ const LoginForm = () => {
     }
   };
 
+  const demo = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    }
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -31,34 +40,42 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <>
+      <div className='backgroundLogin'>
+        <form onSubmit={onLogin} className='login-form'>
+          <h1>Member Login</h1>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div className='fields'>
+            <div className='email-field'>
+              <input
+                name='email'
+                type='search'
+                placeholder='enter e-mail address'
+                value={email}
+                onChange={updateEmail}
+              />
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div className='password-field'>
+              <input
+                name='password'
+                type='password'
+                placeholder=' enter password'
+                value={password}
+                onChange={updatePassword}
+              />
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+          <button className='loginButton' type='submit'>Sign In</button>
+          <button className='demoButton' onClick={e => demo(e)}>Demo User</button>
+        </form>
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+    </>
   );
 };
 

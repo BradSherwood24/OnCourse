@@ -20,7 +20,7 @@ class Aircraft(db.Model):
     need_CFII = db.Column(db.Boolean)
     need_MEI = db.Column(db.Boolean)
     need_complex = db.Column(db.Boolean)
-    need_performace = db.Column(db.Boolean)
+    need_performance = db.Column(db.Boolean)
     airport = db.Column(db.String, nullable=False)
     type = db.Column(db.String)
     gph = db.Column(db.Integer)
@@ -50,7 +50,7 @@ class Aircraft(db.Model):
             'need_CFII': self.need_CFII,
             'need_MEI': self.need_MEI,
             'need_complex': self.need_complex,
-            'need_performace': self.need_performace,
+            'need_performance': self.need_performance,
             'airport': self.airport,
             'type': self.type,
             'gph': self.gph,

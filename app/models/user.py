@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     is_CFII = db.Column(db.Boolean, default=False)
     is_MEI = db.Column(db.Boolean, default=False)
     is_complex = db.Column(db.Boolean, default=False)
-    is_performace = db.Column(db.Boolean, default=False)
+    is_performance = db.Column(db.Boolean, default=False)
     total_time = db.Column(db.Integer, nullable=False)
     home_airport = db.Column(db.String(5), nullable=False)
     img = db.Column(db.String, default='https://www.allhealthnetwork.org/wp-content/uploads/2020/09/profile-blank-1.png')
@@ -47,7 +47,7 @@ class User(db.Model, UserMixin):
             'is_CFII': self.is_CFII,
             'is_MEI': self.is_MEI,
             'is_complex': self.is_complex,
-            'is_performace': self.is_performace,
+            'is_performace': self.is_performance,
             'total_time': self.total_time,
             'home_airport': self.home_airport,
             'img': self.img
