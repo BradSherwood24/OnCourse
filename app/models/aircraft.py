@@ -1,6 +1,6 @@
 from .db import db
 
-class Aircraft(db.model):
+class Aircraft(db.Model):
     __tablename__ = 'aircraft'
 
     id = db.Column(db.Integer, primary_key=True)

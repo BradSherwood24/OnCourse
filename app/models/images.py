@@ -1,7 +1,7 @@
 from .db import db
 
 
-class Images(db.Model):
+class Image(db.Model):
     __tablename__ = 'images'
 
     id = db.Column(db.Integer, primary_key=True)
