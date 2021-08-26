@@ -23,6 +23,10 @@ class User(db.Model, UserMixin):
     home_airport = db.Column(db.String(5), nullable=False)
     img = db.Column(db.String, default='https://www.allhealthnetwork.org/wp-content/uploads/2020/09/profile-blank-1.png')
 
+    aircraft = db.relationship("Aircraft", back_populates='user')
+    comments = db.relationship("Comment", back_populates='user')
+    flights = db.relationship('Flight', back_populates='user')
+
     @property
     def password(self):
         return self.hashed_password

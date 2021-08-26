@@ -8,7 +8,7 @@ class Image(db.Model):
     img_src = db.Column(db.String, nullable=False)
     aircraft_id = db.Column(db.Integer,  db.ForeignKey('aircraft.id'), nullable=False)
 
-    aircraft = db.relationship("Aircraft", back_populates='comments')
+    aircraft = db.relationship("Aircraft", back_populates='images')
 
     def to_dict(self):
         return {
