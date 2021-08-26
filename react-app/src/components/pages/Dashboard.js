@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import Profile from '../Profile';
+import Aircraft from '../Aircraft'
 
 
 function Dashboard() {
@@ -20,6 +21,9 @@ function Dashboard() {
             <h1>{user.full_name}'s dashboard</h1>
             <div>
                 <Profile user={user} />
+            </div>
+            <div>
+                <Aircraft user={user} />
             </div>
         </div>
     );
