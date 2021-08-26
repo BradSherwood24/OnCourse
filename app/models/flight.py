@@ -13,8 +13,8 @@ class Flight(db.Model):
     distance = db.Column(db.Integer)
     save = db.Column(db.Boolean)
 
-    aircraft = db.relationship("Aircraft", back_populates='comments')
-    user = db.relationship("User", back_populates="events")
+    aircraft = db.relationship("Aircraft", back_populates='flights')
+    user = db.relationship("User", back_populates="flights")
 
     def to_dict(self):
         return {

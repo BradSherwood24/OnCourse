@@ -30,6 +30,10 @@ class Aircraft(db.Model):
     seats = db.Column(db.Integer)
     poh = db.Column(db.String)
 
+    comments = db.relationship("Comment", back_populates='aircraft', cascade='delete')
+    user = db.relationship("User", back_populates="aircraft")
+    flights = db.relationship('Flight', back_populates='aircraft')
+    images = db.relationship('Image', back_populates='aircraft')
 
     def to_dict(self):
         return {
