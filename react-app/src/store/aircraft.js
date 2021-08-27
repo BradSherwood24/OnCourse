@@ -28,7 +28,7 @@ export const getAircraft = () => async dispatch => {
 
 
 export const getAircrafts = (id) => async dispatch => {
-  const res = await fetch(`/api/aircraft/${id}`)
+  const res = await fetch(`/api/user/aircraft/${id}`)
 
   if (res.ok) {
     const Aircraft = await res.json();
@@ -72,7 +72,17 @@ export const createAircraft = (aircraft) => async dispatch => {
   } else {
     return ['An error occurred. Please try again.']
   }
+}
 
+export const deleteAircraft = (id) => async dispatch => {
+  const res = await fetch(`/api/aircraft/${id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    await res.json();
+    dispatch(removeAircraft(id))
+  }
 }
 
 // export const updateEvent = (event) => async dispatch => {
@@ -107,19 +117,6 @@ export const createAircraft = (aircraft) => async dispatch => {
 //   }
 // }
 
-// export const deleteEvent = (id) => async dispatch => {
-//   console.log('inside thunk start', id)
-//   const res = await fetch(`/api/events/${id}`, {
-//     method: "DELETE",
-//   });
-
-//   if (res.ok) {
-//     console.log('res.ok passes')
-//     await res.json();
-//     console.log('after res ok', res.json)
-//     dispatch(removeEvent(id))
-//   }
-// }
 
 const initialState = {};
 

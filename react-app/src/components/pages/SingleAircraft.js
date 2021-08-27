@@ -1,41 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../store/session';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { deleteAircraft } from '../../store/aircraft';
+import AircraftForm from '../newAircraft'
 
 function SingleAircraft() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState({});
-  const { userId } = useParams();
+  const history = useHistory();
+  const [aircraft, setAircraft] = useState({});
+  const [update, setUpdate] = useState(false)
+  const user = useSelector(state => state.session.user)
+  const { Id } = useParams();
 
   useEffect(() => {
-    if (!userId) {
+    if (!Id) {
       return;
     }
     (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
+      const response = await fetch(`/api/aircraft/aircraft/${Id}`);
+      const json = await response.json();
+      setAircraft(json);
     })();
-  }, [userId]);
+  }, [Id]);
 
-  if (!user) {
+  if (!aircraft) {
     return null;
+  }
+
+  const handleDeleteSubmit = async e => {
+    e.preventDefault()
+    await dispatch(deleteAircraft(Id))
+    history.push('/dashboard')
   }
 
 
   return (
-    <ul>
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.full_name}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
+    <div>
+      <button onClick={handleDeleteSubmit}>
+        Delete
+      </button>
+      <button onClick={e => setUpdate(!update)}>
+        Edit
+      </button>
+      {update &&
+      <AircraftForm aircraft={aircraft} user={user}/>
+      }
+      <ul>
+        <li>
+          <strong>User Id</strong> {Id}
+        </li>
+        <li>
+          <strong>Username</strong> {aircraft.name}
+        </li>
+        <li>
+          <strong>Email</strong> {aircraft.email}
+        </li>
+      </ul>
+    </div>
   );
 }
 export default SingleAircraft;

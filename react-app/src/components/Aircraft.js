@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAircrafts } from '../store/aircraft'
 import { NavLink } from 'react-router-dom';
 import AircraftForm from './newAircraft'
 
 
 function Aircraft({ user }) {
     const dispatch = useDispatch()
-    const current_aircraft = useSelector(state => state.aircraft)
+    const current_aircraft = useSelector(state => state.session.user.aircraft)
     const [newAircraft, setNewAircraft] = useState(false)
 
     useEffect(() => {
-        dispatch(getAircrafts(user.id))
     }, [dispatch]);
 
-    useEffect(() => {
-
-    }, [current_aircraft])
-
-    const aircraft = () => {
-        Object.keys(current_aircraft)?.forEach((num) => {
-            console.log(current_aircraft[num].id)
-            return (
-                <li key={current_aircraft[num].id}>
-                    <NavLink to={`/aircraft/${current_aircraft[num].id}`}>{current_aircraft[num].name}</NavLink>
-                </li>
-            );
-        })
-    }
-
+    const aircraftList = current_aircraft.map((aircraft) => {
+        aircraft = JSON.parse(aircraft)
+        return (
+          <li key={aircraft.id}>
+            <NavLink to={`/aircraft/${aircraft.id}`}>{aircraft.name}</NavLink>
+          </li>
+        );
+      });
 
     return (
         <div className='aircraft'>
@@ -37,7 +28,7 @@ function Aircraft({ user }) {
             {newAircraft &&
                 <AircraftForm user={user} />
             }
-            <ul>{aircraft}</ul>
+            <ul>{aircraftList}</ul>
         </div>
     );
 }

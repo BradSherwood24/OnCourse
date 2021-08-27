@@ -15,12 +15,26 @@ def aircraft_all():
     return {'aircraft': [aircraft.to_dict() for aircraft in aircrafts]}
 
 
-@aircraft_routes.route('/<int:id>')
+@aircraft_routes.route('/user/<int:id>')
 @login_required
 def aircraft(id):
     aircrafts = Aircraft.query.filter(Aircraft.user_id == id).all()
     return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
 
+
+@aircraft_routes.route('/aircraft/<int:id>')
+@login_required
+def aircraftOne(id):
+    aircraft = Aircraft.query.filter(Aircraft.id == id).first()
+    return json.dumps(aircraft.to_dict())
+
+
+@aircraft_routes.route('/<int:id>', methods=['DELETE'])
+def aircraftDelete(id):
+  aircraft = Aircraft.query.filter(Aircraft.id == id).first()
+  db.session.delete(aircraft)
+  db.session.commit()
+  return {'aircraft': id}
 
 @aircraft_routes.route('/', methods=['POST'])
 def aircraftPost():

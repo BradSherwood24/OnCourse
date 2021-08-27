@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { createAircraft } from '../store/aircraft';
 
-const AircraftForm = ({ user }) => {
+const AircraftForm = ({ user, aircraft }) => {
     const user_id = user.id
     const [errors, setErrors] = useState([])
     const [price, setPrice] = useState(100);
@@ -47,6 +47,10 @@ const AircraftForm = ({ user }) => {
             setErrors(data)
         }
     };
+
+    if(aircraft) {
+        setName(aircraft.name)
+    }
 
     return (
         <div>
