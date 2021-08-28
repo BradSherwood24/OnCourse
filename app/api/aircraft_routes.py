@@ -76,3 +76,65 @@ def aircraftPost():
     print('inside validation p', aircraft.to_dict())
     return json.dumps({'aircraft': [aircraft.to_dict()]})
   return {'errors': [form.errors]}
+
+
+@aircraft_routes.route('/update/<int:id>', methods=['PATCH'])
+def Update(id):
+  # form = AircraftForm()
+  # form['csrf_token'].data = request.cookies['csrf_token']
+  # if form.validate_on_submit():
+  aircraft = Aircraft.query.filter(Aircraft.id == id).first()
+  print(aircraft.name)
+    # aircraft.user_id=form.data['user_id'],
+    # aircraft.price=form.data['price'],
+    # aircraft.manufacturer=form.data['manufacturer'],
+    # aircraft.name=form.data['name'],
+    # aircraft.description=form.data['description'],
+    # aircraft.cover_img=form.data['cover_img'],
+    # aircraft.avionics=form.data['avionics'],
+    # aircraft.ifr_cert=form.data['ifr_cert'],
+    # aircraft.need_IR=form.data['need_IR'],
+    # aircraft.need_CSEL=form.data['need_CSEL'],
+    # aircraft.need_CMEL=form.data['need_CMEL'],
+    # aircraft.need_ATP=form.data['need_ATP'],
+    # aircraft.need_CFI=form.data['need_CFI'],
+    # aircraft.need_CFII=form.data['need_CFII'],
+    # aircraft.need_MEI=form.data['need_MEI'],
+    # aircraft.need_complex=form.data['need_complex'],
+    # aircraft.need_performance=form.data['need_performance'],
+    # aircraft.airport=form.data['airport'],
+    # aircraft.type=form.data['type'],
+    # aircraft.gph=form.data['gph'],
+    # aircraft.fuel_capacity=form.data['fuel_capacity'],
+    # aircraft.cruise_speed=form.data['cruise_speed'],
+    # aircraft.usable_load=form.data['usable_load'],
+    # aircraft.seats=form.data['seats'],
+    # aircraft.poh=form.data['poh']
+  data = request.get_json()
+  aircraft.user_id=data['user_id']
+  aircraft.price=data['price']
+  aircraft.manufacturer=data['manufacturer']
+  aircraft.name=data['name']
+  aircraft.description=data['description']
+  aircraft.cover_img=data['cover_img']
+  aircraft.avionics=data['avionics']
+  aircraft.ifr_cert=data['ifr_cert']
+  aircraft.need_IR=data['need_IR']
+  aircraft.need_CSEL=data['need_CSEL']
+  aircraft.need_CMEL=data['need_CMEL']
+  aircraft.need_ATP=data['need_ATP']
+  aircraft.need_CFI=data['need_CFI']
+  aircraft.need_CFII=data['need_MEI']
+  aircraft.need_complex=data['need_complex']
+  aircraft.need_performance=data['need_performance']
+  aircraft.airport=data['airport']
+  aircraft.type=data['type']
+  aircraft.gph=data['gph']
+  aircraft.fuel_capacity=data['fuel_capacity']
+  aircraft.cruise_speed=data['cruise_speed']
+  aircraft.usable_load=data['usable_load']
+  aircraft.seats=data['seats']
+  aircraft.poh=data['poh']
+  db.session.commit()
+  return {'updated': True}
+# return {'errors': [form.errors]}

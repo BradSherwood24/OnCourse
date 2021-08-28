@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { createAircraft } from '../store/aircraft';
+import { createAircraft, updateAircraft } from '../store/aircraft';
 
 const AircraftForm = ({ user, aircraft }) => {
     const user_id = user.id
@@ -34,23 +34,64 @@ const AircraftForm = ({ user, aircraft }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(createAircraft({
-            user_id, price, manufacturer,
-            name, description, cover_img, avionics,
-            ifr_cert, need_IR, need_CSEL, need_CMEL,
-            need_ATP, need_CFI, need_CFII, need_MEI,
-            need_complex, need_performance, airport,
-            type, gph, fuel_capacity, cruise_speed,
-            usable_load, seats, poh
-        }));
-        if (data) {
-            setErrors(data)
+        if(!aircraft) {
+            const data = await dispatch(createAircraft({
+                user_id, price, manufacturer,
+                name, description, cover_img, avionics,
+                ifr_cert, need_IR, need_CSEL, need_CMEL,
+                need_ATP, need_CFI, need_CFII, need_MEI,
+                need_complex, need_performance, airport,
+                type, gph, fuel_capacity, cruise_speed,
+                usable_load, seats, poh
+            }));
+            if (data) {
+                setErrors(data)
+            }
+        }else {
+            const data = await dispatch(updateAircraft({
+                user_id, price, manufacturer,
+                name, description, cover_img, avionics,
+                ifr_cert, need_IR, need_CSEL, need_CMEL,
+                need_ATP, need_CFI, need_CFII, need_MEI,
+                need_complex, need_performance, airport,
+                type, gph, fuel_capacity, cruise_speed,
+                usable_load, seats, poh
+            }, aircraft.id));
+            if (data) {
+                setErrors(data)
+            }
         }
     };
 
-    if(aircraft) {
-        setName(aircraft.name)
-    }
+    useEffect(() => {
+        if(aircraft) {
+            setPrice(aircraft.price)
+            setManufacturer(aircraft.manufacturer)
+            setName(aircraft.name)
+            setDescription(aircraft.description)
+            setCover_img(aircraft.cover_img)
+            setAvionics(aircraft.avionics)
+            setAirport(aircraft.airport)
+            setpoh(aircraft.poh)
+            setType(aircraft.type)
+            setgph(aircraft.gph)
+            setFuel_capacity(aircraft.fuel_capacity)
+            setCruise_speed(aircraft.cruise_speed)
+            setSeats(aircraft.usable_load)
+            setSeats(aircraft.seats)
+            setIfr_cert(aircraft.ifr_cert)
+            setNeed_IR(aircraft.need_IR)
+            setNeed_CMEL(aircraft.need_CSEL)
+            setNeed_CMEL(aircraft.need_CMEL)
+            setNeed_ATP(aircraft.need_ATP)
+            setNeed_CFI(aircraft.need_CFI)
+            setNeed_CFII(aircraft.need_CFII)
+            setNeed_MEI(aircraft.need_MEI)
+            setNeed_complex(aircraft.need_complex)
+            setNeed_performance(aircraft.need_performance)
+        }
+    }, [aircraft])
+
 
     return (
         <div>

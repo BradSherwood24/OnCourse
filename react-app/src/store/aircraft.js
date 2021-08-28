@@ -85,37 +85,40 @@ export const deleteAircraft = (id) => async dispatch => {
   }
 }
 
-// export const updateEvent = (event) => async dispatch => {
-//   const { name, user_id, category,
-//     description, address, city, state,
-//     image, start, end } = event;
+export const updateAircraft = (aircraft, id) => async dispatch => {
+  const { user_id, price, manufacturer,
+    name, description, cover_img, avionics,
+    ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
+    need_CFII, need_MEI, need_complex, need_performance,
+    airport, type, gph, fuel_capacity, cruise_speed, usable_load,
+    seats, poh } = aircraft;
 
-//   const res = await fetch(`/api/events/${event.id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//       name, user_id, category,
-//       description, address, city, state,
-//       image, start, end
-//     })
-//   });
-
-//   if (res.ok) {
-//     const data = await res.json();
-//     console.log('monkeydata', data)
-//     dispatch(setEvent(data))
-//     return data
-//   } else if (res.status < 500) {
-//     const data = await res.json();
-//     if (data.errors) {
-//       return data.errors;
-//     }
-//   } else {
-//     return ['An error occurred. Please try again.']
-//   }
-// }
+  const res = await fetch(`/api/aircraft/update/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        user_id, price, manufacturer,
+        name, description, cover_img, avionics,
+        ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
+        need_CFII, need_MEI, need_complex, need_performance,
+        airport, type, gph, fuel_capacity, cruise_speed, usable_load,
+        seats, poh
+    })
+  })
+  if (res.ok) {
+    const data = await res.json();
+    return data
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
 
 
 const initialState = {};
