@@ -26,7 +26,6 @@ function SingleAircraft() {
       const response = await fetch(`/api/aircraft/aircraft/${Id}`);
       const json = await response.json();
       setAircraft(json);
-      setImages(json.images)
     })();
   }, [Id]);
 
@@ -42,20 +41,31 @@ function SingleAircraft() {
 
   const addImg = async e => {
     e.preventDefault()
-    const res = await fetch('/api/aircraft/image', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        img_src:newImg,
-        aircraft_id:Id
+    if(newImg.length !== 0) {
+      const res = await fetch('/api/aircraft/image', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          img_src:newImg,
+          aircraft_id:Id
+        })
       })
-    })
-    if(res.ok) {
-      history.push(`/aircraft/${Id}`)
+      if(res.ok) {
+        history.push(`/aircraft/${Id}`)
+      }
+    }else {
+      console.log(aircraft)
     }
   }
+
+  // const imgList = aircraft.images.map(image => {
+  //   console.log(image)
+  //       return (
+  //         <img src={JSON.parse(image.img_src)} key={image.id}></img>
+  //       )
+  //     })
 
 
   return (
@@ -96,12 +106,7 @@ function SingleAircraft() {
         <img src={aircraft.cover_img} className='Image'></img>
       </div>
       <div className='other_imgs'>
-        {images.map(image => {
-          console.log(image)
-          return (
-            <img src={image.img_src} key={image.id}></img>
-          )
-        })}
+        {/* {imgList} */}
       </div>
       <div>
         <h3>Description</h3>

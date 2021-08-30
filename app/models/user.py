@@ -56,5 +56,6 @@ class User(db.Model, UserMixin):
             'total_time': self.total_time,
             'home_airport': self.home_airport,
             'img': self.img,
-            'aircraft': [json.dumps(aircraft.to_dict()) for aircraft in self.aircraft]
+            'aircraft': [json.dumps(aircraft.to_dict()) for aircraft in self.aircraft],
+            'flights': [json.dumps(flight.to_dict()) for flight in self.flights]
         }
