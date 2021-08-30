@@ -6,8 +6,9 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import User from './components/User';
+import User from './components/pages/User';
 import Dashboard from './components/pages/Dashboard';
+import SingleAircraft from './components/pages/SingleAircraft';
 import { authenticate } from './store/session';
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/aircraft/:Id' exact={true} >
+          <SingleAircraft />
         </ProtectedRoute>
         <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />

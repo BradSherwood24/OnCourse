@@ -1,11 +1,12 @@
 from .db import db
+import simplejson as json
 
 class Aircraft(db.Model):
     __tablename__ = 'aircraft'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,  db.ForeignKey('users.id'), nullable=False)
-    price = db.Column(db.Numeric(6,2))
+    price = db.Column(db.Integer)
     manufacturer = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(100), nullable=False)
@@ -63,4 +64,5 @@ class Aircraft(db.Model):
             'usable_load': self.usable_load,
             'seats': self.seats,
             'poh': self.poh,
+            'images': [image.to_dict() for image in self.images]
         }

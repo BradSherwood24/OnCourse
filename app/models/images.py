@@ -14,6 +14,5 @@ class Image(db.Model):
         return {
             'id': self.id,
             'img_src': self.img_src,
-            'user_id': self.user_id,
-            'aircraft': self.aircraft.to_dict(),
+            'aircraft_id': self.aircraft_id
         }

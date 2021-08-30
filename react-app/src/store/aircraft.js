@@ -28,7 +28,7 @@ export const getAircraft = () => async dispatch => {
 
 
 export const getAircrafts = (id) => async dispatch => {
-  const res = await fetch(`/api/aircraft/${id}`)
+  const res = await fetch(`/api/user/aircraft/${id}`)
 
   if (res.ok) {
     const Aircraft = await res.json();
@@ -72,54 +72,54 @@ export const createAircraft = (aircraft) => async dispatch => {
   } else {
     return ['An error occurred. Please try again.']
   }
-
 }
 
-// export const updateEvent = (event) => async dispatch => {
-//   const { name, user_id, category,
-//     description, address, city, state,
-//     image, start, end } = event;
+export const deleteAircraft = (id) => async dispatch => {
+  const res = await fetch(`/api/aircraft/${id}`, {
+    method: "DELETE",
+  });
 
-//   const res = await fetch(`/api/events/${event.id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//       name, user_id, category,
-//       description, address, city, state,
-//       image, start, end
-//     })
-//   });
+  if (res.ok) {
+    await res.json();
+    dispatch(removeAircraft(id))
+  }
+}
 
-//   if (res.ok) {
-//     const data = await res.json();
-//     console.log('monkeydata', data)
-//     dispatch(setEvent(data))
-//     return data
-//   } else if (res.status < 500) {
-//     const data = await res.json();
-//     if (data.errors) {
-//       return data.errors;
-//     }
-//   } else {
-//     return ['An error occurred. Please try again.']
-//   }
-// }
+export const updateAircraft = (aircraft, id) => async dispatch => {
+  const { user_id, price, manufacturer,
+    name, description, cover_img, avionics,
+    ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
+    need_CFII, need_MEI, need_complex, need_performance,
+    airport, type, gph, fuel_capacity, cruise_speed, usable_load,
+    seats, poh } = aircraft;
 
-// export const deleteEvent = (id) => async dispatch => {
-//   console.log('inside thunk start', id)
-//   const res = await fetch(`/api/events/${id}`, {
-//     method: "DELETE",
-//   });
+  const res = await fetch(`/api/aircraft/update/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        user_id, price, manufacturer,
+        name, description, cover_img, avionics,
+        ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
+        need_CFII, need_MEI, need_complex, need_performance,
+        airport, type, gph, fuel_capacity, cruise_speed, usable_load,
+        seats, poh
+    })
+  })
+  if (res.ok) {
+    const data = await res.json();
+    return data
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
 
-//   if (res.ok) {
-//     console.log('res.ok passes')
-//     await res.json();
-//     console.log('after res ok', res.json)
-//     dispatch(removeEvent(id))
-//   }
-// }
 
 const initialState = {};
 
@@ -132,7 +132,6 @@ const aircraftReducer = (state = initialState, action) => {
       })
       return newState
     case SET_AIRCRAFTS:
-      newState = {}
       action.aircraft.aircraft.forEach(air => {
         newState[air.id] = air
       })

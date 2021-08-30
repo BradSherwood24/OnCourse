@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import simplejson as json
 
 
 class User(db.Model, UserMixin):
@@ -54,5 +55,7 @@ class User(db.Model, UserMixin):
             'is_performace': self.is_performance,
             'total_time': self.total_time,
             'home_airport': self.home_airport,
-            'img': self.img
+            'img': self.img,
+            'aircraft': [json.dumps(aircraft.to_dict()) for aircraft in self.aircraft],
+            'flights': [json.dumps(flight.to_dict()) for flight in self.flights]
         }

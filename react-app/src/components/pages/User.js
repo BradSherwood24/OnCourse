@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { logout } from '../store/session';
+import { logout } from '../../store/session';
 import { useParams } from 'react-router-dom';
 
 function User() {
