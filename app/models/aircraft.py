@@ -1,4 +1,5 @@
 from .db import db
+import simplejson as json
 
 class Aircraft(db.Model):
     __tablename__ = 'aircraft'
@@ -63,4 +64,5 @@ class Aircraft(db.Model):
             'usable_load': self.usable_load,
             'seats': self.seats,
             'poh': self.poh,
+            'images': [json.dumps(image.to_dict()) for image in self.images]
         }

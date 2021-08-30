@@ -1,17 +1,19 @@
-.profile {
+.aircraft {
     width: 300px;
     margin-left: 20px;
     border: 2px solid black;
     padding: 15px;
-    padding-top: 0px;
+    margin-top: 15px;
     background-color: rgb(0, 0, 83);
     color: white;
 }
 
-.img-container {
-    width: 100%;
+.List {
+    background-color: wheat;
 }
 
-.profile-img {
-    width: 150px;
+.aircraft_list > * {
+    color: rgb(0, 0, 0);
 }
+
+

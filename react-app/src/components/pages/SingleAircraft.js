@@ -4,13 +4,18 @@ import { logout } from '../../store/session';
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteAircraft } from '../../store/aircraft';
 import AircraftForm from '../newAircraft'
+import './SingleAircraft.css'
 
 function SingleAircraft() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [aircraft, setAircraft] = useState({});
   const [update, setUpdate] = useState(false)
+  const [img, setImg] = useState(0)
+  const [newImg, setNewImg] = useState('')
+  const [add, setAdd] = useState(false)
   const user = useSelector(state => state.session.user)
+  const [images, setImages] = useState([])
   const { Id } = useParams();
 
   useEffect(() => {
@@ -21,6 +26,7 @@ function SingleAircraft() {
       const response = await fetch(`/api/aircraft/aircraft/${Id}`);
       const json = await response.json();
       setAircraft(json);
+      setImages(json.images)
     })();
   }, [Id]);
 
@@ -34,29 +40,73 @@ function SingleAircraft() {
     history.push('/dashboard')
   }
 
+  const addImg = async e => {
+    e.preventDefault()
+    const res = await fetch('/api/aircraft/image', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        img_src:newImg,
+        aircraft_id:Id
+      })
+    })
+    if(res.ok) {
+      history.push(`/aircraft/${Id}`)
+    }
+  }
+
 
   return (
     <div>
-      <button onClick={handleDeleteSubmit}>
-        Delete
-      </button>
-      <button onClick={e => setUpdate(!update)}>
-        Edit
-      </button>
-      {update &&
-      <AircraftForm aircraft={aircraft} user={user}/>
-      }
-      <ul>
-        <li>
-          <strong>User Id</strong> {Id}
-        </li>
-        <li>
-          <strong>Username</strong> {aircraft.name}
-        </li>
-        <li>
-          <strong>Email</strong> {aircraft.email}
-        </li>
-      </ul>
+      <div className='title'>
+        <h1>{aircraft.manufacturer} {aircraft.name}</h1>
+        <h2>Price:  ${aircraft.price}/h</h2>
+        {user.id === aircraft.user_id &&
+          <div className='buttons'>
+            <button onClick={handleDeleteSubmit}>
+              Delete
+            </button>
+            <button onClick={e => setUpdate(!update)}>
+              Edit
+            </button>
+            <button onClick={e => setAdd(!add)}>
+              Add Images
+            </button>
+            {update &&
+              <AircraftForm aircraft={aircraft} user={user} />
+            }
+            {add &&
+              <div>
+                <form onSubmit={addImg}>
+                  <label>image url</label>
+                  <input
+                    value={newImg}
+                    onChange={e => setNewImg(e.target.value)}>
+                  </input>
+                  <button type='submit'>Add</button>
+                </form>
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <div className='Image_div'>
+        <img src={aircraft.cover_img} className='Image'></img>
+      </div>
+      <div className='other_imgs'>
+        {images.map(image => {
+          console.log(image)
+          return (
+            <img src={image.img_src} key={image.id}></img>
+          )
+        })}
+      </div>
+      <div>
+        <h3>Description</h3>
+        <p>{aircraft.description}</p>
+      </div>
     </div>
   );
 }
