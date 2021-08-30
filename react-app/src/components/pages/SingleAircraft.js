@@ -41,31 +41,38 @@ function SingleAircraft() {
 
   const addImg = async e => {
     e.preventDefault()
-    if(newImg.length !== 0) {
+    if (newImg.length !== 0) {
       const res = await fetch('/api/aircraft/image', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          img_src:newImg,
-          aircraft_id:Id
+          img_src: newImg,
+          aircraft_id: Id
         })
       })
-      if(res.ok) {
+      if (res.ok) {
         history.push(`/aircraft/${Id}`)
       }
-    }else {
+    } else {
       console.log(aircraft)
     }
   }
 
-  // const imgList = aircraft.images.map(image => {
-  //   console.log(image)
-  //       return (
-  //         <img src={JSON.parse(image.img_src)} key={image.id}></img>
-  //       )
-  //     })
+  const imgList = () => {
+    aircraft = JSON.parse(aircraft)
+
+    return (
+      aircraft.images.map((image) => {
+        image = JSON.parse(image)
+        return (
+          <img key={image.id} src={image.img_src}>
+          </img>
+        )
+      })
+    );
+  };
 
 
   return (
@@ -106,7 +113,7 @@ function SingleAircraft() {
         <img src={aircraft.cover_img} className='Image'></img>
       </div>
       <div className='other_imgs'>
-        {/* {imgList} */}
+        {imgList}
       </div>
       <div>
         <h3>Description</h3>
