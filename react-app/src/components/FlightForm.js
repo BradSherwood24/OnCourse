@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { createAircraft, updateAircraft } from '../store/aircraft';
+import { createFlight } from '../store/flight';
+import './flightForm.css'
 
-const AircraftForm = ({ user, flight }) => {
+const FlightForm = ({ user, flight, closeForm }) => {
     const user_id = user.id
     const [errors, setErrors] = useState([])
-    const [aircraft_id, setAircraft_id] = useState('');
+    const [aircraft_id, setAircraft_id] = useState(7);
     const [name, setName] = useState('');
-    const [airports, setAirports] = useState([]);
+    const [airports, setAirports] = useState(['KGRR']);
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('')
     const [distance, setDistance] = useState('')
@@ -17,18 +18,12 @@ const AircraftForm = ({ user, flight }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if(!flight) {
-            // const data = await dispatch(createAircraft({
-            //     user_id, price, manufacturer,
-            //     name, description, cover_img, avionics,
-            //     ifr_cert, need_IR, need_CSEL, need_CMEL,
-            //     need_ATP, need_CFI, need_CFII, need_MEI,
-            //     need_complex, need_performance, airport,
-            //     type, gph, fuel_capacity, cruise_speed,
-            //     usable_load, seats, poh
-            // }));
-            // if (data) {
-            //     setErrors(data)
-            // }
+            const data = await dispatch(createFlight({
+                user_id, aircraft_id, name, airports, departure, arrival, distance
+            }));
+            if (data) {
+                setErrors(data)
+            }
         }else {
             // const data = await dispatch(updateAircraft({
             //     user_id, price, manufacturer,
@@ -76,8 +71,8 @@ const AircraftForm = ({ user, flight }) => {
 
 
     return (
-        <div>
-            <form onSubmit={e => onSubmit(e)}>
+        <div className='flight_form_div'>
+            <form onSubmit={e => onSubmit(e)} className='flight_form'>
             <h1>New Flight</h1>
                 <div>
                     <label>Name of Flight</label>
@@ -116,9 +111,10 @@ const AircraftForm = ({ user, flight }) => {
                     </input>
                 </div>
                 <button type='submit'>submit</button>
+                <button onClick={closeForm}>close</button>
             </form>
         </div>
     );
 };
 
-export default AircraftForm;
+export default FlightForm;

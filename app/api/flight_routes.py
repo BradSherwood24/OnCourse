@@ -13,3 +13,17 @@ def get_route(id):
 @flight_routes.route('/new', methods=['POST'])
 def new_flight():
     data = request.get_json()
+    print('DATA!!!!', data)
+    flight = Flight(
+        user_id=data['user_id'],
+        aircraft_id=data['aircraft_id'],
+        name=data['name'],
+        departure=data['departure'],
+        arrival=data['arrival'],
+        airports=data['airports'],
+        distance=data['distance'],
+        save=False
+    )
+    db.session.add(flight)
+    db.session.commit()
+    return {'flight':json.dumps(flight.to_dict())}
