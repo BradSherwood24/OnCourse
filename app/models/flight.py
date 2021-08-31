@@ -27,4 +27,5 @@ class Flight(db.Model):
             'airports': self.airports,
             'distance': self.distance,
             'save': self.save,
+            'aircraft': self.aircraft.to_dict()
         }

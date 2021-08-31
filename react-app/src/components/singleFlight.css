@@ -14,11 +14,18 @@
     top: 15%;
     left: 10%;
     right: 10%;
-    display: flex;
     width: auto;
     font: 95% Arial, Helvetica, sans-serif;
 	margin: 10px auto;
 	padding: 16px;
 	background-color: #F7F7F7;
     border: 2px solid black;
+}
+
+.flight_aircraft_img {
+    width: 150px;
+}
+
+.flight_aircraft_div {
+    display: flex;
 }
