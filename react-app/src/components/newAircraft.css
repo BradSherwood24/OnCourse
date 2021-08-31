@@ -1,0 +1,24 @@
+.aircraft_form_div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: black;
+    background-color: rgba(0, 0, 0, .5);
+    background-size: cover;
+}
+
+.aircraft_form {
+    position: fixed;
+    top: 15%;
+    left: 30%;
+    overflow: scroll;
+    display: flex;
+    max-width: 900px;
+}
+
+.aircraft_form > div {
+    padding-left: 15px;
+    margin: 0px;
+}

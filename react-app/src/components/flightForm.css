@@ -1,0 +1,16 @@
+.flight_form_div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: black;
+    background-color: rgba(0, 0, 0, .5);
+    background-size: cover;
+}
+
+.flight_form {
+    position: fixed;
+    top: 25%;
+    left: 40%;
+}
