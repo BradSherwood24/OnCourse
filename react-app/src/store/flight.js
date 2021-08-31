@@ -45,6 +45,16 @@ export const createFlight = (flight) => async dispatch => {
   }
 }
 
+export const deleteFlight = (id) => async dispatch => {
+  const res = await fetch(`/api/flight/delete/${id}`, {
+    method:'DELETE'
+  })
+  if(res.ok) {
+    const data = await res.json()
+    return data
+  }
+}
+
 const initialState = {};
 
 const flightReducer = (state = initialState, action) => {

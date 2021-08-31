@@ -8,7 +8,7 @@ const FlightForm = ({ user, flight, closeForm }) => {
     const [errors, setErrors] = useState([])
     const [aircraft_id, setAircraft_id] = useState(7);
     const [name, setName] = useState('');
-    const [airports, setAirports] = useState(['KGRR']);
+    const [airports, setAirports] = useState('KGRR ');
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('')
     const [distance, setDistance] = useState('')
