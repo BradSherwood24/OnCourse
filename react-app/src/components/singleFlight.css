@@ -1,0 +1,24 @@
+.flight_div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: black;
+    background-color: rgba(0, 0, 0, .5);
+    background-size: cover;
+}
+
+.flight {
+    position: fixed;
+    top: 15%;
+    left: 10%;
+    right: 10%;
+    display: flex;
+    width: auto;
+    font: 95% Arial, Helvetica, sans-serif;
+	margin: 10px auto;
+	padding: 16px;
+	background-color: #F7F7F7;
+    border: 2px solid black;
+}

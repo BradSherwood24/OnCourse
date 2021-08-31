@@ -27,3 +27,10 @@ def new_flight():
     db.session.add(flight)
     db.session.commit()
     return {'flight':json.dumps(flight.to_dict())}
+
+@flight_routes.route('/delete/<int:id>', methods=['DELETE'])
+def delete_flight(id):
+    flight = Flight.query.filter(Flight.id == id).first()
+    db.session.delete(flight)
+    db.session.commit()
+    return {'delete':True}

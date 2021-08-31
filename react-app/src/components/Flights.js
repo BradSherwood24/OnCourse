@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useParams, useHistory } from 'react-router-dom';
 import FlightForm from './FlightForm'
+import SingleFlight from './SingleFlight'
 
 function Flights({ user }) {
     const dispatch = useDispatch()
     const [newFlight, setNewFlight] = useState(false)
+    const [flight, setFlight] = useState({})
     const { Id } = useParams();
     const current_flights = useSelector(state => state.session.user.flights)
 
@@ -17,14 +19,15 @@ function Flights({ user }) {
     const flightList = current_flights.map((flight) => {
         flight = JSON.parse(flight)
         return (
-            <li key={flight.id} className='aircraft_list'>
-                <NavLink to={`/aircraft/${flight.id}`}>{flight.name}</NavLink>
+            <li key={flight.id} className='flight_list' onClick={() => setFlight(flight)}>
+                {flight.name}
             </li>
         );
     });
 
     const closeForm = () => {
         setNewFlight(false)
+        setFlight({})
     }
 
     return (
@@ -33,6 +36,9 @@ function Flights({ user }) {
             <button onClick={e => setNewFlight(!newFlight)}>+</button>
             {newFlight &&
             <FlightForm user={user} closeForm={closeForm} />
+            }
+            {flight.name &&
+                <SingleFlight flight={flight} closeForm={closeForm} />
             }
             <div className='List'>
                 <ul>{flightList}</ul>
