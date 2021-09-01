@@ -26,7 +26,9 @@ def aircraft(id):
 @login_required
 def aircraft_search():
     data = request.get_json()
-    aircrafts = Aircraft.query.filter(Aircraft.airport.ilike(data['airport'])).all()
+    airport = data['airport']
+    aircrafts = Aircraft.query.filter(Aircraft.airport.ilike(f'%{airport}%')).all()
+    print('DATA!!!!', aircrafts)
     return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
 
 

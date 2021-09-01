@@ -19,87 +19,51 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if(!flight) {
+        if (!flight) {
             const data = await dispatch(createFlight({
                 user_id, aircraft_id, name, airports, departure, arrival, distance
             }));
             if (data) {
                 setErrors(data)
             }
-        }else {
-            // const data = await dispatch(updateAircraft({
-            //     user_id, price, manufacturer,
-            //     name, description, cover_img, avionics,
-            //     ifr_cert, need_IR, need_CSEL, need_CMEL,
-            //     need_ATP, need_CFI, need_CFII, need_MEI,
-            //     need_complex, need_performance, airport,
-            //     type, gph, fuel_capacity, cruise_speed,
-            //     usable_load, seats, poh
-            // }, aircraft.id));
-            // if (data) {
-            //     setErrors(data)
-            // }
         }
     };
 
-    useEffect(() => {
-        // if(flight) {
-        //     setPrice(aircraft.price)
-        //     setManufacturer(aircraft.manufacturer)
-        //     setName(aircraft.name)
-        //     setDescription(aircraft.description)
-        //     setCover_img(aircraft.cover_img)
-        //     setAvionics(aircraft.avionics)
-        //     setAirport(aircraft.airport)
-        //     setpoh(aircraft.poh)
-        //     setType(aircraft.type)
-        //     setgph(aircraft.gph)
-        //     setFuel_capacity(aircraft.fuel_capacity)
-        //     setCruise_speed(aircraft.cruise_speed)
-        //     setSeats(aircraft.usable_load)
-        //     setSeats(aircraft.seats)
-        //     setIfr_cert(aircraft.ifr_cert)
-        //     setNeed_IR(aircraft.need_IR)
-        //     setNeed_CMEL(aircraft.need_CSEL)
-        //     setNeed_CMEL(aircraft.need_CMEL)
-        //     setNeed_ATP(aircraft.need_ATP)
-        //     setNeed_CFI(aircraft.need_CFI)
-        //     setNeed_CFII(aircraft.need_CFII)
-        //     setNeed_MEI(aircraft.need_MEI)
-        //     setNeed_complex(aircraft.need_complex)
-        //     setNeed_performance(aircraft.need_performance)
-        // }
-    }, [flight])
 
-    useEffect( async () => {
-        console.log(aircraftList)
-        if(departingAirport.length === 4) {
+
+    useEffect(async () => {
+        if (departingAirport.length === 4) {
             const res = await fetch('/api/aircraft/search', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({
-                      airport: departingAirport
-                  })
+                },
+                body: JSON.stringify({
+                    airport: departingAirport
+                })
             })
-            if(res.ok) {
+            if (res.ok) {
                 const aircraft = await res.json()
-                setAircraftList(aircraft)
+                setAircraftList(aircraft.aircraft)
             }
+        } else {
+            setAircraftList([])
         }
     }, [departingAirport])
+
+    const selectAircraft = aircraftList.map((aircraft) => {
+        return (
+            <div>
+                <img className='flight_form_aircraft_img' src={aircraft.cover_img}></img>
+            </div>
+        )
+    })
 
 
     return (
         <div className='flight_form_div'>
             <form onSubmit={e => onSubmit(e)} className='flight_form'>
-            <h1>New Flight</h1>
-            {aircraftList.length &&
-            <div>
-                <h2>hello</h2>
-            </div>
-            }
+                <h1>New Flight</h1>
                 <div>
                     <label>Name of Flight</label>
                     <input
@@ -118,6 +82,11 @@ const FlightForm = ({ user, flight, closeForm }) => {
                     >
                     </input>
                 </div>
+                {aircraftList.length > 0 &&
+                    <div>
+                        {selectAircraft}
+                    </div>
+                }
                 <div>
                     <label>Departure Time</label>
                     <input
