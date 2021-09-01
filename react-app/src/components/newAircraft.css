@@ -11,9 +11,8 @@
 
 .aircraft_form {
     position: fixed;
-    top: 15%;
+    top: 7%;
     left: 30%;
-    overflow: scroll;
     display: flex;
     max-width: 900px;
 }

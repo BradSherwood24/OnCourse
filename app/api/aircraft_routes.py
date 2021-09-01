@@ -57,6 +57,8 @@ def aircraftPost():
       price=form.data['price'],
       manufacturer=form.data['manufacturer'],
       name=form.data['name'],
+      year=form.data['year'],
+      tail_number=form.data['tail_number'],
       description=form.data['description'],
       cover_img=form.data['cover_img'],
       avionics=form.data['avionics'],

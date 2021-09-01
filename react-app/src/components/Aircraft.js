@@ -22,12 +22,16 @@ function Aircraft({ user }) {
     );
   });
 
+  const closeForm = () => {
+    setNewAircraft(false)
+  }
+
   return (
     <div className='aircraft'>
       <h2>Your Aircraft</h2>
       <button onClick={e => setNewAircraft(!newAircraft)}>+</button>
       {newAircraft &&
-        <AircraftForm user={user} />
+        <AircraftForm user={user} closeForm={closeForm} />
       }
       <div className='List'>
         <ul>{aircraftList}</ul>

@@ -4,12 +4,14 @@ import { Redirect } from 'react-router-dom';
 import { createAircraft, updateAircraft } from '../store/aircraft';
 import './newAircraft.css'
 
-const AircraftForm = ({ user, aircraft }) => {
+const AircraftForm = ({ user, aircraft, closeForm }) => {
     const user_id = user.id
     const [errors, setErrors] = useState([])
     const [price, setPrice] = useState(100);
     const [manufacturer, setManufacturer] = useState('');
     const [name, setName] = useState('');
+    const [year, setYear] = useState(2000);
+    const [tail_number, setTail_number] = useState('');
     const [description, setDescription] = useState('');
     const [cover_img, setCover_img] = useState('');
     const [avionics, setAvionics] = useState('')
@@ -38,7 +40,7 @@ const AircraftForm = ({ user, aircraft }) => {
         if (!aircraft) {
             const data = await dispatch(createAircraft({
                 user_id, price, manufacturer,
-                name, description, cover_img, avionics,
+                name, year, tail_number, description, cover_img, avionics,
                 ifr_cert, need_IR, need_CSEL, need_CMEL,
                 need_ATP, need_CFI, need_CFII, need_MEI,
                 need_complex, need_performance, airport,
@@ -51,7 +53,7 @@ const AircraftForm = ({ user, aircraft }) => {
         } else {
             const data = await dispatch(updateAircraft({
                 user_id, price, manufacturer,
-                name, description, cover_img, avionics,
+                name, year, tail_number, description, cover_img, avionics,
                 ifr_cert, need_IR, need_CSEL, need_CMEL,
                 need_ATP, need_CFI, need_CFII, need_MEI,
                 need_complex, need_performance, airport,
@@ -69,6 +71,8 @@ const AircraftForm = ({ user, aircraft }) => {
             setPrice(aircraft.price)
             setManufacturer(aircraft.manufacturer)
             setName(aircraft.name)
+            setYear(aircraft.year)
+            setTail_number(aircraft.tail_number)
             setDescription(aircraft.description)
             setCover_img(aircraft.cover_img)
             setAvionics(aircraft.avionics)
@@ -123,6 +127,24 @@ const AircraftForm = ({ user, aircraft }) => {
                             type='text'
                             onChange={e => setName(e.target.value)}
                             value={name}
+                        >
+                        </input>
+                    </div>
+                    <div>
+                        <label>year</label>
+                        <input
+                            type='number'
+                            onChange={e => setYear(e.target.value)}
+                            value={year}
+                        >
+                        </input>
+                    </div>
+                    <div>
+                        <label>tail Number</label>
+                        <input
+                            type='text'
+                            onChange={e => setTail_number(e.target.value)}
+                            value={tail_number}
                         >
                         </input>
                     </div>
@@ -229,6 +251,8 @@ const AircraftForm = ({ user, aircraft }) => {
                         >
                         </input>
                     </div>
+                </div>
+                <div>
                     <div>
                         <label>IFR Certified</label>
                         <input
@@ -238,8 +262,6 @@ const AircraftForm = ({ user, aircraft }) => {
                         >
                         </input>
                     </div>
-                </div>
-                <div>
                     <h3>Requirements to fly</h3>
                     <div>
                         <label>Need Instrument Rating</label>
@@ -323,6 +345,7 @@ const AircraftForm = ({ user, aircraft }) => {
                         </input>
                     </div>
                     <button type='submit'>submit</button>
+                    <button onClick={closeForm}>close</button>
                 </div>
             </form>
         </div>

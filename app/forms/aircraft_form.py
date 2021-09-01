@@ -10,6 +10,8 @@ class AircraftForm(FlaskForm):
   price = IntegerField('price', validators=[DataRequired()])
   manufacturer = StringField('manufacturer', validators=[DataRequired()])
   name = StringField('name', validators=[DataRequired()])
+  year = IntegerField('year', validators=[DataRequired()])
+  tail_number = StringField('tail_number', validators=[DataRequired()])
   description = StringField('description', validators=[DataRequired()])
   cover_img = StringField('cover_img', validators=[DataRequired()])
   avionics = StringField('avionics')

@@ -74,6 +74,10 @@ function SingleAircraft() {
     );
   };
 
+  const closeForm = () => {
+    setUpdate(false)
+  }
+
 
   return (
     <div>
@@ -92,7 +96,7 @@ function SingleAircraft() {
               Add Images
             </button>
             {update &&
-              <AircraftForm aircraft={aircraft} user={user} />
+              <AircraftForm aircraft={aircraft} user={user} closeForm={closeForm} />
             }
             {add &&
               <div>

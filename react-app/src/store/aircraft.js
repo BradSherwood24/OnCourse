@@ -39,11 +39,12 @@ export const getAircrafts = (id) => async dispatch => {
 export const createAircraft = (aircraft) => async dispatch => {
     console.log('in route')
   const { user_id, price, manufacturer,
-    name, description, cover_img, avionics,
-    ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
-    need_CFII, need_MEI, need_complex, need_performance,
-    airport, type, gph, fuel_capacity, cruise_speed, usable_load,
-    seats, poh } = aircraft;
+    name, year, tail_number, description, cover_img, avionics,
+    ifr_cert, need_IR, need_CSEL, need_CMEL,
+    need_ATP, need_CFI, need_CFII, need_MEI,
+    need_complex, need_performance, airport,
+    type, gph, fuel_capacity, cruise_speed,
+    usable_load, seats, poh} = aircraft;
 
   const res = await fetch('/api/aircraft/', {
     method: "POST",
@@ -51,12 +52,13 @@ export const createAircraft = (aircraft) => async dispatch => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-        user_id, price, manufacturer,
-        name, description, cover_img, avionics,
-        ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
-        need_CFII, need_MEI, need_complex, need_performance,
-        airport, type, gph, fuel_capacity, cruise_speed, usable_load,
-        seats, poh
+      user_id, price, manufacturer,
+      name, year, tail_number, description, cover_img, avionics,
+      ifr_cert, need_IR, need_CSEL, need_CMEL,
+      need_ATP, need_CFI, need_CFII, need_MEI,
+      need_complex, need_performance, airport,
+      type, gph, fuel_capacity, cruise_speed,
+      usable_load, seats, poh
     })
   });
 
@@ -87,11 +89,12 @@ export const deleteAircraft = (id) => async dispatch => {
 
 export const updateAircraft = (aircraft, id) => async dispatch => {
   const { user_id, price, manufacturer,
-    name, description, cover_img, avionics,
-    ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
-    need_CFII, need_MEI, need_complex, need_performance,
-    airport, type, gph, fuel_capacity, cruise_speed, usable_load,
-    seats, poh } = aircraft;
+    name, year, tail_number, description, cover_img, avionics,
+    ifr_cert, need_IR, need_CSEL, need_CMEL,
+    need_ATP, need_CFI, need_CFII, need_MEI,
+    need_complex, need_performance, airport,
+    type, gph, fuel_capacity, cruise_speed,
+    usable_load, seats, poh } = aircraft;
 
   const res = await fetch(`/api/aircraft/update/${id}`, {
     method: "PATCH",
@@ -99,12 +102,13 @@ export const updateAircraft = (aircraft, id) => async dispatch => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-        user_id, price, manufacturer,
-        name, description, cover_img, avionics,
-        ifr_cert, need_IR, need_CSEL, need_CMEL, need_ATP, need_CFI,
-        need_CFII, need_MEI, need_complex, need_performance,
-        airport, type, gph, fuel_capacity, cruise_speed, usable_load,
-        seats, poh
+      user_id, price, manufacturer,
+      name, year, tail_number, description, cover_img, avionics,
+      ifr_cert, need_IR, need_CSEL, need_CMEL,
+      need_ATP, need_CFI, need_CFII, need_MEI,
+      need_complex, need_performance, airport,
+      type, gph, fuel_capacity, cruise_speed,
+      usable_load, seats, poh
     })
   })
   if (res.ok) {
