@@ -22,6 +22,14 @@ def aircraft(id):
     return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
 
 
+@aircraft_routes.route('/search', methods=['POST'])
+@login_required
+def aircraft_search():
+    data = request.get_json()
+    aircrafts = Aircraft.query.filter(Aircraft.airport.ilike(data['airport'])).all()
+    return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
+
+
 @aircraft_routes.route('/aircraft/<int:id>')
 @login_required
 def aircraftOne(id):

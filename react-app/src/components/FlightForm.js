@@ -7,7 +7,9 @@ const FlightForm = ({ user, flight, closeForm }) => {
     const user_id = user.id
     const [errors, setErrors] = useState([])
     const [aircraft_id, setAircraft_id] = useState(7);
+    const [aircraftList, setAircraftList] = useState([])
     const [name, setName] = useState('');
+    const [departingAirport, setDepartingAirport] = useState('')
     const [airports, setAirports] = useState('KGRR ');
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('')
@@ -69,17 +71,50 @@ const FlightForm = ({ user, flight, closeForm }) => {
         // }
     }, [flight])
 
+    useEffect( async () => {
+        console.log(aircraftList)
+        if(departingAirport.length === 4) {
+            const res = await fetch('/api/aircraft/search', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                      airport: departingAirport
+                  })
+            })
+            if(res.ok) {
+                const aircraft = await res.json()
+                setAircraftList(aircraft)
+            }
+        }
+    }, [departingAirport])
+
 
     return (
         <div className='flight_form_div'>
             <form onSubmit={e => onSubmit(e)} className='flight_form'>
             <h1>New Flight</h1>
+            {aircraftList.length &&
+            <div>
+                <h2>hello</h2>
+            </div>
+            }
                 <div>
                     <label>Name of Flight</label>
                     <input
                         type='text'
                         onChange={e => setName(e.target.value)}
                         value={name}
+                    >
+                    </input>
+                </div>
+                <div>
+                    <label>4 letter id of departing airport</label>
+                    <input
+                        type='text'
+                        onChange={e => setDepartingAirport(e.target.value)}
+                        value={departingAirport}
                     >
                     </input>
                 </div>
