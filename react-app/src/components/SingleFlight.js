@@ -4,9 +4,10 @@ import { useParams, useHistory } from 'react-router-dom';
 import { deleteFlight, updateFlight } from '../store/flight';
 import './singleFlight.css'
 
-function SingleFlight({ flight, closeForm }) {
+function SingleFlight({  flight, closeForm }) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const flights = useSelector((state) => state.session.user.flights)
     const user_id = useSelector((state) => state.session.user.id)
     const [aircraft_id, setAircraft_id] = useState(flight.aircraft_id);
     const [aircraftList, setAircraftList] = useState([])
@@ -21,14 +22,18 @@ function SingleFlight({ flight, closeForm }) {
     const [updateFlightInfo, setUpdateFlightInfo] = useState(false)
     const airports = flight.airports
 
+    useEffect(() => {
+        setName(flight.name)
+    }, [flight])
+
 
     const onDelete = async (e) => {
         e.preventDefault()
         const res = await dispatch(deleteFlight(flight.id))
+        closeForm()
     }
 
     const stops = airports.split(' ').map((stop) => {
-        console.log(airports)
         return (
             <li key={stop}>{stop}</li>
         )
