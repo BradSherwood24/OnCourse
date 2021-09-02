@@ -28,6 +28,22 @@ def new_flight():
     db.session.commit()
     return {'flight':json.dumps(flight.to_dict())}
 
+@flight_routes.route('/update/<int:id>', methods=['PATCH'])
+def update(id):
+    data = request.get_json()
+    flight = Flight.query.filter(Flight.id == id).first()
+    flight.user_id=data['user_id'],
+    flight.aircraft_id=data['aircraft_id'],
+    flight.name=data['name'],
+    flight.departure=data['departure'],
+    flight.arrival=data['arrival'],
+    flight.airports=data['airports'],
+    flight.distance=data['distance'],
+    flight.save=data['save']
+    db.session.commit()
+    return {'flight':json.dumps(flight.to_dict())}
+
+
 @flight_routes.route('/delete/<int:id>', methods=['DELETE'])
 def delete_flight(id):
     flight = Flight.query.filter(Flight.id == id).first()

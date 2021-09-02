@@ -6,22 +6,21 @@ import './flightForm.css'
 const FlightForm = ({ user, flight, closeForm }) => {
     const user_id = user.id
     const [errors, setErrors] = useState([])
-    const [aircraft_id, setAircraft_id] = useState(7);
+    const [aircraft_id, setAircraft_id] = useState(0);
     const [aircraftList, setAircraftList] = useState([])
     const [name, setName] = useState('');
     const [departingAirport, setDepartingAirport] = useState('')
-    const [airports, setAirports] = useState('KGRR ');
+    const [arrivingAirport, setArrivingAirport] = useState('');
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('')
     const [distance, setDistance] = useState('')
-    const [save, setSave] = useState('')
     const dispatch = useDispatch();
 
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!flight) {
             const data = await dispatch(createFlight({
-                user_id, aircraft_id, name, airports, departure, arrival, distance
+                user_id, aircraft_id, name, airports:`${departingAirport} ${arrivingAirport}`, departure, arrival, distance
             }));
             if (data) {
                 setErrors(data)
@@ -53,11 +52,13 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
     const selectAircraft = aircraftList.map((aircraft) => {
         return (
-            <div>
+            <div key={aircraft.id} onClick={() => setAircraft_id(aircraft.id)}>
                 <img className='flight_form_aircraft_img' src={aircraft.cover_img}></img>
             </div>
         )
     })
+
+
 
 
     return (
@@ -84,9 +85,19 @@ const FlightForm = ({ user, flight, closeForm }) => {
                 </div>
                 {aircraftList.length > 0 &&
                     <div>
+                        <h3>Select Aircraft</h3>
                         {selectAircraft}
                     </div>
                 }
+                <div>
+                    <label>4 letter id of arriving airport</label>
+                    <input
+                        type='text'
+                        onChange={e => setArrivingAirport(e.target.value)}
+                        value={arrivingAirport}
+                    >
+                    </input>
+                </div>
                 <div>
                     <label>Departure Time</label>
                     <input
