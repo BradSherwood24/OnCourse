@@ -9,6 +9,8 @@ class Aircraft(db.Model):
     price = db.Column(db.Integer)
     manufacturer = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    tail_number = db.Column(db.String(15), nullable=False)
     description = db.Column(db.String(100), nullable=False)
     cover_img = db.Column(db.String(), nullable=False)
     avionics = db.Column(db.String, nullable=False)
@@ -43,6 +45,8 @@ class Aircraft(db.Model):
             'price': self.price,
             'manufacturer': self.manufacturer,
             'name': self.name,
+            'year': self.year,
+            'tail_number': self.tail_number,
             'description': self.description,
             'cover_img': self.cover_img,
             'avionics': self.avionics,

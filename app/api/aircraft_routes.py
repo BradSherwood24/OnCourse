@@ -22,6 +22,16 @@ def aircraft(id):
     return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
 
 
+@aircraft_routes.route('/search', methods=['POST'])
+@login_required
+def aircraft_search():
+    data = request.get_json()
+    airport = data['airport']
+    aircrafts = Aircraft.query.filter(Aircraft.airport.ilike(f'%{airport}%')).all()
+    print('DATA!!!!', aircrafts)
+    return json.dumps({'aircraft': [aircraft.to_dict() for aircraft in aircrafts]})
+
+
 @aircraft_routes.route('/aircraft/<int:id>')
 @login_required
 def aircraftOne(id):
@@ -47,6 +57,8 @@ def aircraftPost():
       price=form.data['price'],
       manufacturer=form.data['manufacturer'],
       name=form.data['name'],
+      year=form.data['year'],
+      tail_number=form.data['tail_number'],
       description=form.data['description'],
       cover_img=form.data['cover_img'],
       avionics=form.data['avionics'],
