@@ -112,7 +112,6 @@ export const signUp = (fullName, email, password, homeAirport, img, totalTime, c
 export const refresh = (id) => async (dispatch) => {
   const res = await fetch(`api/users/${id}`)
   const user = await res.json()
-  console.log(user)
   dispatch(setUser(user))
 }
 

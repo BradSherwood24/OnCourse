@@ -4,22 +4,40 @@ import { NavLink } from 'react-router-dom';
 import { useParams, useHistory } from 'react-router-dom';
 import FlightForm from './FlightForm'
 import SingleFlight from './SingleFlight'
+import { refresh } from '../store/session';
 
 function Flights({ user }) {
     const dispatch = useDispatch()
     const [newFlight, setNewFlight] = useState(false)
     const [flight, setFlight] = useState({})
+    const [flight_id, setFlight_id] = useState(1)
     const { Id } = useParams();
     const current_flights = useSelector(state => state.session.user.flights)
+    const flightState = useSelector(state => state.flight)
+
+    useEffect(async () => {
+        setNewFlight(false)
+        await dispatch(refresh(user.id))
+    }, [flightState]);
 
     useEffect(() => {
+        current_flights.forEach((flight) => {
+            flight = JSON.parse(flight)
+            if (flight.id === flight_id) {
+                setFlight(flight)
+            }
+        })
+    },[current_flights])
 
-    }, [dispatch]);
+    const flight_click = (flight) => {
+        setFlight(flight)
+        setFlight_id(flight.id)
+    }
 
     const flightList = current_flights.map((flight) => {
         flight = JSON.parse(flight)
         return (
-            <li key={flight.id} className='flight_list' onClick={() => setFlight(flight)}>
+            <li key={flight.id} className='flight_list' onClick={() => flight_click(flight)}>
                 {flight.name}
             </li>
         );
