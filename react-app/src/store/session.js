@@ -109,6 +109,13 @@ export const signUp = (fullName, email, password, homeAirport, img, totalTime, c
   }
 }
 
+export const refresh = (id) => async (dispatch) => {
+  const res = await fetch(`api/users/${id}`)
+  const user = await res.json()
+  console.log(user)
+  dispatch(setUser(user))
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:

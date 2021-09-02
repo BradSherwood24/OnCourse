@@ -6,6 +6,7 @@ import './newAircraft.css'
 
 const AircraftForm = ({ user, aircraft, closeForm }) => {
     const user_id = user.id
+    const aircrafts = useSelector((state) => state.aircraft)
     const [errors, setErrors] = useState([])
     const [price, setPrice] = useState(100);
     const [manufacturer, setManufacturer] = useState('');
@@ -96,6 +97,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
             setNeed_performance(aircraft.need_performance)
         }
     }, [aircraft])
+
 
 
     return (

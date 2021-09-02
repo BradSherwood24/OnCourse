@@ -120,7 +120,7 @@ def Update(id):
   aircraft.seats=data['seats']
   aircraft.poh=data['poh']
   db.session.commit()
-  return {'updated': True}
+  return json.dumps({'aircraft': [aircraft.to_dict()]})
 
 
 @aircraft_routes.route('/image', methods=['POST'])

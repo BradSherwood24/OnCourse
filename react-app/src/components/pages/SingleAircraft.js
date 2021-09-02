@@ -17,8 +17,10 @@ function SingleAircraft() {
   const user = useSelector(state => state.session.user)
   const [images, setImages] = useState([])
   const { Id } = useParams();
+  const aircrafts = useSelector((state) => state.aircraft)
 
   useEffect(() => {
+    closeForm()
     if (!Id) {
       return;
     }
@@ -27,7 +29,7 @@ function SingleAircraft() {
       const json = await response.json();
       setAircraft(json);
     })();
-  }, [Id]);
+  }, [Id, aircrafts]);
 
   if (!aircraft) {
     return null;
@@ -60,23 +62,20 @@ function SingleAircraft() {
     }
   }
 
-  const imgList = () => {
-    aircraft = JSON.parse(aircraft)
-
-    return (
-      aircraft.images.map((image) => {
-        image = JSON.parse(image)
-        return (
-          <img key={image.id} src={image.img_src}>
-          </img>
-        )
-      })
-    );
-  };
-
   const closeForm = () => {
     setUpdate(false)
   }
+
+  // const imgList = aircraft.images.map((image) => (
+  //     aircraft.images.map((image) => {
+  //       image = JSON.parse(image)
+  //       return (
+  //         <img key={image.id} src={image.img_src}>
+  //         </img>
+  //       )
+  //     })
+  //   ));
+
 
 
   return (
@@ -117,7 +116,7 @@ function SingleAircraft() {
         <img src={aircraft.cover_img} className='Image'></img>
       </div>
       <div className='other_imgs'>
-        {imgList}
+        {/* {imgList} */}
       </div>
       <div>
         <h3>Description</h3>

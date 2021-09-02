@@ -113,6 +113,7 @@ export const updateAircraft = (aircraft, id) => async dispatch => {
   })
   if (res.ok) {
     const data = await res.json();
+    dispatch(setAircrafts(data))
     return data
   } else if (res.status < 500) {
     const data = await res.json();
