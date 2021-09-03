@@ -1,0 +1,48 @@
+.weather_container {
+    width: 600px;
+    margin-top: 25px;
+    margin-left: 20px;
+    /* padding: 15px; */
+    padding-top: 5px;
+    padding-bottom: 0px;
+    color: Black;
+}
+
+.weather_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgb(0, 0, 83);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 5px 5px 5px  rgba(0, 0, 0, .7);
+}
+
+.weather_icon {
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.react-icons {
+    padding: 0;
+    margin: 0;
+}
+
+.weather_temp {
+    padding-right: 15px;
+}
+
+.weather_radar_img {
+    width: 600px;
+    border-left: 2px solid rgb(0, 0, 83);
+    border-right: 2px solid rgb(0, 0, 83);
+    border-bottom: 2px solid rgb(0, 0, 83);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 5px 5px 5px  rgba(0, 0, 0, .7);
+}
+
+.weather_radar_div {
+
+}

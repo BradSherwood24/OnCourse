@@ -6,6 +6,8 @@ import FlightForm from './FlightForm'
 import SingleFlight from './SingleFlight'
 import { refresh } from '../store/session';
 
+import './flights.css'
+
 function Flights({ user }) {
     const dispatch = useDispatch()
     const [newFlight, setNewFlight] = useState(false)
@@ -49,7 +51,7 @@ function Flights({ user }) {
     }
 
     return (
-        <div className='aircraft'>
+        <div className='flights'>
             <h2>Your flights</h2>
             <button onClick={e => setNewFlight(!newFlight)}>+</button>
             {newFlight &&

@@ -7,6 +7,7 @@
 
 .welcome_splash > h1{
     text-decoration: underline;
+    font-size: xxx-large;
 }
 
 .description_splash {
@@ -37,14 +38,16 @@
     background-color: rgba(0, 0, 0, .3);
     color: white;
     border-top: 0px solid;
-    border-radius: 5px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .pilots_image_splash > h5 {
     background-color: rgba(0, 0, 0, .3);
     color: white;
     border-bottom: 0px solid;
-    border-radius: 5px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .owners_image_splash {
@@ -62,12 +65,14 @@
     background-color: rgba(0, 0, 0, .3);
     color: white;
     border-top: 0px solid;
-    border-radius: 5px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .owners_image_splash > h5 {
     background-color: rgba(0, 0, 0, .3);
     color: white;
     border-bottom: 0px solid;
-    border-radius: 5px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
