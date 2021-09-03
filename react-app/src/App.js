@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/pages/User';
 import Dashboard from './components/pages/Dashboard';
 import SingleAircraft from './components/pages/SingleAircraft';
+import Splash from './components/pages/Splash';
 import { authenticate } from './store/session';
 
 function App() {
@@ -51,6 +52,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Redirect to='/dashboard' />;
+        </ProtectedRoute>
+        <ProtectedRoute path='/splash' exact={true} >
+          <Splash />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

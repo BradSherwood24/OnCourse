@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { deleteFlight, updateFlight } from '../store/flight';
 import './singleFlight.css'
 
-function SingleFlight({  flight, closeForm }) {
+function SingleFlight({ flight, closeForm }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const flights = useSelector((state) => state.session.user.flights)
@@ -20,11 +20,33 @@ function SingleFlight({  flight, closeForm }) {
     const [save, setSave] = useState(flight.save)
     const [updateName, setUpdateName] = useState(false)
     const [updateFlightInfo, setUpdateFlightInfo] = useState(false)
+    const [addStop, setAddStop] = useState(false)
+    const [newStop, setNewStop] = useState('')
     const airports = flight.airports
 
     useEffect(() => {
         setName(flight.name)
     }, [flight])
+
+    useEffect(async () => {
+        if (departingAirport.length === 4) {
+            const res = await fetch('/api/aircraft/search', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    airport: departingAirport
+                })
+            })
+            if (res.ok) {
+                const aircraft = await res.json()
+                setAircraftList(aircraft.aircraft)
+            }
+        } else {
+            setAircraftList([])
+        }
+    }, [departingAirport])
 
 
     const onDelete = async (e) => {
@@ -49,6 +71,14 @@ function SingleFlight({  flight, closeForm }) {
         setUpdateName(false)
     }
 
+    const selectAircraft = aircraftList.map((aircraft) => {
+        return (
+            <div key={aircraft.id} onClick={() => setAircraft_id(aircraft.id)}>
+                <img className='flight_form_aircraft_img' src={aircraft.cover_img}></img>
+            </div>
+        )
+    })
+
     return (
         <div className='flight_div'>
             <div className='flight'>
@@ -68,7 +98,17 @@ function SingleFlight({  flight, closeForm }) {
                 <button className='delete_flight_button' onClick={(e) => onDelete(e)}>delete</button>
                 <button className='close_flight_button' onClick={closeForm}>X</button>
                 <div>
-                    <h2>Stops</h2>
+                    <div>
+                        <h2>Stops</h2>
+                        {addStop &&
+                        <>
+                        <input
+                        value={newStop}
+                        onChange={(e) => setNewStop(e.target.value)}></input>
+                        </>
+                        }
+                        <button onClick={() => setAddStop(!addStop)}>+</button>
+                    </div>
                     <ul>
                         {stops}
                     </ul>
@@ -94,22 +134,62 @@ function SingleFlight({  flight, closeForm }) {
                     </div>
                 }
                 {updateFlightInfo &&
-                    <div onClick={() => setUpdateFlightInfo(false)}>
-                        <h2>Flight Information</h2>
-                        <div className='flight_aircraft_div'>
-                            <img className='flight_aircraft_img' src={flight.aircraft.cover_img}></img>
-                            <h4>{flight.aircraft.manufacturer} {flight.aircraft.name}</h4>
-                            <h4>Price: ${flight.aircraft.price}/h</h4>
-                        </div>
-                        <p>
-                            <strong>Distance</strong> {flight.distance}NM
-                        </p>
-                        <p>
-                            <strong>Departure</strong> {flight.departure}
-                        </p>
-                        <p>
-                            <strong>Arrival</strong> {flight.arrival}
-                        </p>
+                    <div className='flight_form_div'>
+                        <form onSubmit={e => submit_update(e)} className='flight_form'>
+                            <div>
+                                <label>4 letter id of departing airport</label>
+                                <input
+                                    type='text'
+                                    onChange={e => setDepartingAirport(e.target.value)}
+                                    value={departingAirport}
+                                >
+                                </input>
+                            </div>
+                            {aircraftList.length > 0 &&
+                                <div>
+                                    <h3>Select Aircraft</h3>
+                                    {selectAircraft}
+                                </div>
+                            }
+                            <div>
+                                <label>4 letter id of arriving airport</label>
+                                <input
+                                    type='text'
+                                    onChange={e => setArrivingAirport(e.target.value)}
+                                    value={arrivingAirport}
+                                >
+                                </input>
+                            </div>
+                            <div>
+                                <label>Departure Time</label>
+                                <input
+                                    type='text'
+                                    onChange={e => setDeparture(e.target.value)}
+                                    value={departure}
+                                >
+                                </input>
+                            </div>
+                            <div>
+                                <label>Arrival Time</label>
+                                <input
+                                    type='text'
+                                    onChange={e => setArrival(e.target.value)}
+                                    value={arrival}
+                                >
+                                </input>
+                            </div>
+                            <div>
+                                <label>distance </label>
+                                <input
+                                    type='number'
+                                    onChange={e => setDistance(e.target.value)}
+                                    value={distance}
+                                >
+                                </input>
+                            </div>
+                            <button type='submit'>submit</button>
+                            <button onClick={closeForm}>close</button>
+                        </form>
                     </div>
                 }
             </div>
