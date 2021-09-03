@@ -17,7 +17,7 @@ const NavBar = () => {
                 </Link>
             }
             {!current_user &&
-                <Link to='/login'>
+                <Link to='/splash'>
                     <img className='logo' src={logo} alt='logo-main-alt'></img>
                 </Link>
             }
@@ -39,11 +39,11 @@ const NavBar = () => {
                     }
                     {current_user &&
                         <>
-                            <li>
+                            {/* <li>
                                 <NavLink to='/aircraft/new' exact={true} activeClassName='active'>
                                     List Your Aircraft
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li>
                                 <LogoutButton />
                             </li>

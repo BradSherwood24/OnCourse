@@ -19,7 +19,7 @@ html, body {
 }
 
 body {
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 header {
@@ -28,9 +28,9 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 10px 10%;
+    /* padding: 10px 10%; */
     padding-bottom: 20px;
-    height: 70px;
+    height: 50px;
     padding-right: 0;
     width: 100%;
     background-color: #dbdbdb;
@@ -46,7 +46,7 @@ header {
     left: 0;
     width: 130px;
     padding-bottom: 15px;
-    padding-top: 12px;
+    padding-top: 5px;
 }
 
 .nav__links {
@@ -56,7 +56,7 @@ header {
 
 .nav__links li {
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0px 40px;
 }
 
 .nav__links li a{
@@ -72,9 +72,13 @@ header {
     margin-left: 5px;
     background-size: cover;
     background-color: #FDB813;
-    border: 2px solid black;
+    border: none;
+    /* border: 2px solid black; */
     width: 100px;
-    height: 50px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;

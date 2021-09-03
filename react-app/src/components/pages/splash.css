@@ -1,0 +1,73 @@
+.welcome_splash {
+    text-align: center;
+    padding: 50px;
+    padding-top: 25px;
+    background-color: #fccc5c;
+}
+
+.welcome_splash > h1{
+    text-decoration: underline;
+}
+
+.description_splash {
+    padding-top: 20px;
+}
+
+.images_splash {
+    display: flex;
+    justify-content: space-around;
+    height: 400px;
+    padding-top: 10px;
+}
+
+.pilots_image_splash {
+    text-align: center;
+    padding: 10px;
+    background-image: url('https://images.unsplash.com/photo-1511140276483-30c1217ca449?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJpdmF0ZSUyMGhlbGljb3B0ZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80');
+    background-size: cover;
+    background-position: 0px -110px;
+    background-repeat: no-repeat;
+    max-width: 500px;
+    border: 0px solid black;
+    border-radius: 10px;
+}
+
+.pilots_image_splash > h2 {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, .3);
+    color: white;
+    border-top: 0px solid;
+    border-radius: 5px;
+}
+
+.pilots_image_splash > h5 {
+    background-color: rgba(0, 0, 0, .3);
+    color: white;
+    border-bottom: 0px solid;
+    border-radius: 5px;
+}
+
+.owners_image_splash {
+    text-align: center;
+    padding: 10px;
+    background-image: url('https://cdn.wallpapersafari.com/25/46/gzV31X.png');
+    background-size: cover;
+    max-width: 500px;
+    border: 0px solid black;
+    border-radius: 10px;
+}
+
+.owners_image_splash > h2 {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, .3);
+    color: white;
+    border-top: 0px solid;
+    border-radius: 5px;
+}
+
+.owners_image_splash > h5 {
+    background-color: rgba(0, 0, 0, .3);
+    color: white;
+    border-bottom: 0px solid;
+    border-radius: 5px;
+}
