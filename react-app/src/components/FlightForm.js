@@ -41,10 +41,11 @@ const FlightForm = ({ user, flight, closeForm }) => {
         if (!distance) {
             newErrors.push('Must have a distance')
         }
-        if (newErrors) {
+        if (newErrors.length) {
             setErrors(newErrors)
             return
         }
+        console.log('hello')
         if (!flight) {
             const data = await dispatch(createFlight({
                 user_id, aircraft_id, name, airports: `${departingAirport} ${arrivingAirport}`, departure, arrival, distance
