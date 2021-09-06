@@ -8,6 +8,7 @@ const FlightForm = ({ user, flight, closeForm }) => {
     const [errors, setErrors] = useState([])
     const [aircraft_id, setAircraft_id] = useState(0);
     const [aircraftList, setAircraftList] = useState([])
+    const [airportLists, setAirportList] = useState([])
     const [name, setName] = useState('');
     const [departingAirport, setDepartingAirport] = useState('')
     const [arrivingAirport, setArrivingAirport] = useState('');
@@ -18,15 +19,50 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        const newErrors = []
+        if (!aircraft_id) {
+            newErrors.push('You must select an aircraft')
+        }
+        if (!name) {
+            newErrors.push('Must have a name')
+        }
+        if (!departingAirport) {
+            newErrors.push('Must have a departing airport')
+        }
+        if (!arrivingAirport) {
+            newErrors.push('Must have a arriving airport')
+        }
+        if (!departure) {
+            newErrors.push('Must have a departure time')
+        }
+        if (!arrival) {
+            newErrors.push('Must have a arrival time')
+        }
+        if (!distance) {
+            newErrors.push('Must have a distance')
+        }
+        if (newErrors) {
+            setErrors(newErrors)
+            return
+        }
         if (!flight) {
             const data = await dispatch(createFlight({
-                user_id, aircraft_id, name, airports:`${departingAirport} ${arrivingAirport}`, departure, arrival, distance
+                user_id, aircraft_id, name, airports: `${departingAirport} ${arrivingAirport}`, departure, arrival, distance
             }));
             if (data) {
                 setErrors(data)
             }
         }
     };
+
+    useEffect(async () => {
+        const res = await fetch('/api/aircraft/airports')
+        if (res.ok) {
+            const airports = await res.json()
+            setAirportList(airports.airports)
+            setDepartingAirport(airports.airports[0])
+        }
+    }, [])
 
 
 
@@ -61,10 +97,16 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
 
 
+
     return (
         <div className='flight_form_div'>
             <form onSubmit={e => onSubmit(e)} className='flight_form'>
                 <h1>New Flight</h1>
+                <div>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
                 <div>
                     <label>Name of Flight</label>
                     <input
@@ -75,13 +117,19 @@ const FlightForm = ({ user, flight, closeForm }) => {
                     </input>
                 </div>
                 <div>
-                    <label>4 letter id of departing airport</label>
-                    <input
+                    <label>select departing airport</label>
+                    <select
                         type='text'
                         onChange={e => setDepartingAirport(e.target.value)}
                         value={departingAirport}
                     >
-                    </input>
+                        {airportLists?.map((airport) => {
+                            return (
+                                <option value={airport}>{airport}</option>
+                            )
+                        })}
+
+                    </select>
                 </div>
                 {aircraftList.length > 0 &&
                     <div>

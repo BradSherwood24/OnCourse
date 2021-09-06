@@ -36,8 +36,54 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
     const [need_performance, setNeed_performance] = useState(false)
     const dispatch = useDispatch();
 
+    useEffect(() => {
+
+    }, [errors])
+
     const onSubmit = async (e) => {
         e.preventDefault();
+        const newErrors = []
+        if (!name) {
+            newErrors.push('Must have a name')
+        }
+        if (!manufacturer) {
+            newErrors.push('Must have a manufacturer')
+        }
+        if (!price) {
+            newErrors.push('Must have a price')
+        }
+        if (!tail_number) {
+            newErrors.push('Must have a tail number')
+        }
+        if (!description) {
+            newErrors.push('Must have a description')
+        }
+        if (!cover_img) {
+            newErrors.push('Must have a cover image')
+        }
+        if (!airport) {
+            newErrors.push('Must have a base airport')
+        }
+        if (!gph) {
+            newErrors.push('Must have a gph')
+        }
+        if (!fuel_capacity) {
+            newErrors.push('Must have a fuel capacity')
+        }
+        if (!cruise_speed) {
+            newErrors.push('Must have a cruise speed')
+        }
+        if (!usable_load) {
+            newErrors.push('Must have a usable load')
+        }
+        if (!seats) {
+            newErrors.push('Must have number of seats')
+        }
+        if (newErrors.length) {
+            console.log('hello')
+            setErrors(newErrors)
+            return
+        }
         if (!aircraft) {
             const data = await dispatch(createAircraft({
                 user_id, price, manufacturer,
@@ -103,251 +149,258 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
     return (
         <div className='aircraft_form_div'>
             <form onSubmit={e => onSubmit(e)} className='aircraft_form'>
-                <div>
-                    <h1>New Aircraft</h1>
+                <h1>New Aircraft</h1>
+                <div className='inside_form'>
                     <div>
-                        <label>price per hour</label>
-                        <input
-                            type='number'
-                            onChange={e => setPrice(e.target.value)}
-                            value={price}
-                        >
-                        </input>
+                        <div>
+                            {errors.map((error, ind) => (
+                                <div key={ind}>{error}</div>
+                            ))}
+                        </div>
+                        <div>
+                            <label>price per hour</label>
+                            <input
+                                type='number'
+                                onChange={e => setPrice(e.target.value)}
+                                value={price}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>manufacturer</label>
+                            <input
+                                type='text'
+                                onChange={e => setManufacturer(e.target.value)}
+                                value={manufacturer}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>name</label>
+                            <input
+                                type='text'
+                                onChange={e => setName(e.target.value)}
+                                value={name}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>year</label>
+                            <input
+                                type='number'
+                                onChange={e => setYear(e.target.value)}
+                                value={year}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>tail Number</label>
+                            <input
+                                type='text'
+                                onChange={e => setTail_number(e.target.value)}
+                                value={tail_number}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>description</label>
+                            <input
+                                type='text'
+                                onChange={e => setDescription(e.target.value)}
+                                value={description}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Cover Image</label>
+                            <input
+                                type='text'
+                                onChange={e => setCover_img(e.target.value)}
+                                value={cover_img}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>avionics</label>
+                            <input
+                                type='text'
+                                onChange={e => setAvionics(e.target.value)}
+                                value={avionics}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>airport</label>
+                            <input
+                                type='text'
+                                onChange={e => setAirport(e.target.value)}
+                                value={airport}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Link to poh</label>
+                            <input
+                                type='text'
+                                onChange={e => setpoh(e.target.value)}
+                                value={poh}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>type</label>
+                            <select
+                                onChange={e => setType(e.target.value)}
+                                value={type}
+                            >
+                                <option value='single-engine land'>single-engine land</option>
+                                <option value='multi-engine land'>multi-engine land</option>
+                                <option value='single-engine sea'>single-engine sea</option>
+                                <option value='multi-engine sea'>multi-engine sea</option>
+                                <option value='Rotar'>Rotar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>gallons per hour</label>
+                            <input
+                                type='number'
+                                onChange={e => setgph(e.target.value)}
+                                value={gph}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>fuel capacity</label>
+                            <input
+                                type='number'
+                                onChange={e => setFuel_capacity(e.target.value)}
+                                value={fuel_capacity}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>cruise speed</label>
+                            <input
+                                type='number'
+                                onChange={e => setCruise_speed(e.target.value)}
+                                value={cruise_speed}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>usable load</label>
+                            <input
+                                type='number'
+                                onChange={e => setUsable_load(e.target.value)}
+                                value={usable_load}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>seats</label>
+                            <input
+                                type='number'
+                                onChange={e => setSeats(e.target.value)}
+                                value={seats}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>IFR Certified</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setIfr_cert(e.target.value)}
+                                value={ifr_cert}
+                            >
+                            </input>
+                        </div>
                     </div>
                     <div>
-                        <label>manufacturer</label>
-                        <input
-                            type='text'
-                            onChange={e => setManufacturer(e.target.value)}
-                            value={manufacturer}
-                        >
-                        </input>
+                        <h3>Requirements to fly</h3>
+                        <div>
+                            <label>Need Instrument Rating</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_IR(e.target.value)}
+                                value={need_IR}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need CSEL</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_CSEL(e.target.value)}
+                                value={need_CSEL}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need CMEL</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_CMEL(e.target.value)}
+                                value={need_CMEL}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need ATP</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_ATP(e.target.value)}
+                                value={need_ATP}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need CFI</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_CFI(e.target.value)}
+                                value={need_CFI}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need CFII</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_CFII(e.target.value)}
+                                value={need_CFII}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need MEI</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_MEI(e.target.value)}
+                                value={need_MEI}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need Complex</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_complex(e.target.value)}
+                                value={need_complex}
+                            >
+                            </input>
+                        </div>
+                        <div>
+                            <label>Need Performance</label>
+                            <input
+                                type='checkbox'
+                                onChange={e => setNeed_performance(e.target.value)}
+                                value={need_performance}
+                            >
+                            </input>
+                        </div>
+                        <button type='submit'>submit</button>
+                        <button onClick={closeForm}>close</button>
                     </div>
-                    <div>
-                        <label>name</label>
-                        <input
-                            type='text'
-                            onChange={e => setName(e.target.value)}
-                            value={name}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>year</label>
-                        <input
-                            type='number'
-                            onChange={e => setYear(e.target.value)}
-                            value={year}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>tail Number</label>
-                        <input
-                            type='text'
-                            onChange={e => setTail_number(e.target.value)}
-                            value={tail_number}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>description</label>
-                        <input
-                            type='text'
-                            onChange={e => setDescription(e.target.value)}
-                            value={description}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Cover Image</label>
-                        <input
-                            type='text'
-                            onChange={e => setCover_img(e.target.value)}
-                            value={cover_img}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>avionics</label>
-                        <input
-                            type='text'
-                            onChange={e => setAvionics(e.target.value)}
-                            value={avionics}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>airport</label>
-                        <input
-                            type='text'
-                            onChange={e => setAirport(e.target.value)}
-                            value={airport}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Link to poh</label>
-                        <input
-                            type='text'
-                            onChange={e => setpoh(e.target.value)}
-                            value={poh}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>type</label>
-                        <select
-                            onChange={e => setType(e.target.value)}
-                            value={type}
-                        >
-                            <option value='single-engine land'>single-engine land</option>
-                            <option value='multi-engine land'>multi-engine land</option>
-                            <option value='single-engine sea'>single-engine sea</option>
-                            <option value='multi-engine sea'>multi-engine sea</option>
-                            <option value='Rotar'>Rotar</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>gallons per hour</label>
-                        <input
-                            type='number'
-                            onChange={e => setgph(e.target.value)}
-                            value={gph}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>fuel capacity</label>
-                        <input
-                            type='number'
-                            onChange={e => setFuel_capacity(e.target.value)}
-                            value={fuel_capacity}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>cruise speed</label>
-                        <input
-                            type='number'
-                            onChange={e => setCruise_speed(e.target.value)}
-                            value={cruise_speed}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>usable load</label>
-                        <input
-                            type='number'
-                            onChange={e => setUsable_load(e.target.value)}
-                            value={usable_load}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>seats</label>
-                        <input
-                            type='number'
-                            onChange={e => setSeats(e.target.value)}
-                            value={seats}
-                        >
-                        </input>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label>IFR Certified</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setIfr_cert(e.target.value)}
-                            value={ifr_cert}
-                        >
-                        </input>
-                    </div>
-                    <h3>Requirements to fly</h3>
-                    <div>
-                        <label>Need Instrument Rating</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_IR(e.target.value)}
-                            value={need_IR}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need CSEL</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_CSEL(e.target.value)}
-                            value={need_CSEL}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need CMEL</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_CMEL(e.target.value)}
-                            value={need_CMEL}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need ATP</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_ATP(e.target.value)}
-                            value={need_ATP}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need CFI</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_CFI(e.target.value)}
-                            value={need_CFI}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need CFII</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_CFII(e.target.value)}
-                            value={need_CFII}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need MEI</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_MEI(e.target.value)}
-                            value={need_MEI}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need Complex</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_complex(e.target.value)}
-                            value={need_complex}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <label>Need Performance</label>
-                        <input
-                            type='checkbox'
-                            onChange={e => setNeed_performance(e.target.value)}
-                            value={need_performance}
-                        >
-                        </input>
-                    </div>
-                    <button type='submit'>submit</button>
-                    <button onClick={closeForm}>close</button>
                 </div>
             </form>
         </div>

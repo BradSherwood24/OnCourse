@@ -16,21 +16,11 @@ function Profile({ user }) {
 
     return (
         <div className='profile'>
-            <h2>profile</h2>
             <div className='img-container'>
                 <img className='profile-img' src={user.img}></img>
             </div>
-            <ul>
-                <li>
-                    <strong>User Id</strong> {user.id}
-                </li>
-                <li>
-                    <strong>Name</strong> {user.full_name}
-                </li>
-                <li>
+                    <p><strong>Name</strong> {user.full_name}</p>
                     <strong>Email</strong> {user.email}
-                </li>
-            </ul>
         </div>
     );
 }

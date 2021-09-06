@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 import Profile from '../Profile';
 import Aircraft from '../Aircraft';
 import Flights from '../Flights';
+import Weather from '../Weather';
+
+import './dashboard.css'
 
 
 function Dashboard() {
@@ -15,13 +18,18 @@ function Dashboard() {
     if (!user) history.push('/login')
 
     return (
-        <div>
-            <h1>{user.full_name}'s dashboard</h1>
+        <div className='dashboard_containing_div'>
+            {/* <h1>{user.full_name}'s dashboard</h1> */}
             <div>
-                <Profile user={user} />
+                <div>
+                    <Profile user={user} />
+                </div>
+                <div>
+                    <Aircraft user={user} />
+                </div>
             </div>
             <div>
-                <Aircraft user={user} />
+                <Weather />
             </div>
             <div>
                 <Flights user={user} />

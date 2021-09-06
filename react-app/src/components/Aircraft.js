@@ -20,9 +20,10 @@ function Aircraft({ user }) {
   const aircraftList = current_aircraft.map((aircraft) => {
     aircraft = JSON.parse(aircraft)
     return (
-      <li key={aircraft.id} className='aircraft_list'>
-        <NavLink to={`/aircraft/${aircraft.id}`}>{aircraft.name}</NavLink>
-      </li>
+      <div key={aircraft.id} className='aircraft_list_div' onClick={() => window.location = `/aircraft/${aircraft.id}`}>
+          <img className="aircraft_list_img" src={aircraft.cover_img}></img>
+          <h2 className='aircraft_list_tail_number'>{aircraft.tail_number}</h2>
+      </div>
     );
   });
 
@@ -32,13 +33,13 @@ function Aircraft({ user }) {
 
   return (
     <div className='aircraft'>
-      <h2>Your Aircraft</h2>
-      <button onClick={e => setNewAircraft(!newAircraft)}>+</button>
+      <h2 className='aircraft_label'>Your Aircraft</h2>
+      <button className='aircraft_plus_button' onClick={e => setNewAircraft(!newAircraft)}>+</button>
       {newAircraft &&
         <AircraftForm user={user} closeForm={closeForm} />
       }
       <div className='List'>
-        <ul>{aircraftList}</ul>
+        {aircraftList}
       </div>
     </div>
   );

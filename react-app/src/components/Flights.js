@@ -6,6 +6,8 @@ import FlightForm from './FlightForm'
 import SingleFlight from './SingleFlight'
 import { refresh } from '../store/session';
 
+import './flights.css'
+
 function Flights({ user }) {
     const dispatch = useDispatch()
     const [newFlight, setNewFlight] = useState(false)
@@ -27,19 +29,20 @@ function Flights({ user }) {
                 setFlight(flight)
             }
         })
-    },[current_flights])
+    }, [current_flights])
 
-    const flight_click = (flight) => {
-        setFlight(flight)
-        setFlight_id(flight.id)
+    const flight_click = (flightToSet) => {
+        setFlight(flightToSet)
+        setFlight_id(flightToSet.id)
+        console.log(flight)
     }
 
     const flightList = current_flights.map((flight) => {
         flight = JSON.parse(flight)
         return (
-            <li key={flight.id} className='flight_list' onClick={() => flight_click(flight)}>
+            <div key={flight.id} className='flight_list' onClick={() => flight_click(flight)}>
                 {flight.name}
-            </li>
+            </div>
         );
     });
 
@@ -49,17 +52,19 @@ function Flights({ user }) {
     }
 
     return (
-        <div className='aircraft'>
-            <h2>Your flights</h2>
-            <button onClick={e => setNewFlight(!newFlight)}>+</button>
+        <div className='flights'>
+            {/* <div className='flights_header'> */}
+                <h2>Your flights</h2>
+                <button className='flights_plus_button' onClick={e => setNewFlight(!newFlight)}>+</button>
+            {/* </div> */}
             {newFlight &&
-            <FlightForm user={user} closeForm={closeForm} />
+                <FlightForm user={user} closeForm={closeForm} />
             }
-            {flight.name &&
+            {flight.id &&
                 <SingleFlight flight={flight} closeForm={closeForm} />
             }
             <div className='List'>
-                <ul>{flightList}</ul>
+                {flightList}
             </div>
         </div>
     );

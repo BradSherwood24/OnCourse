@@ -1,0 +1,4 @@
+.dashboard_containing_div {
+    display: flex;
+    justify-content: space-around;
+}
