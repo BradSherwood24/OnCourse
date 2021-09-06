@@ -20,7 +20,6 @@ function Weather({ user }) {
     const [reactIcon, setReactIcon] = useState('WiDaySunny')
 
     useEffect(async () => {
-        if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(async function (position) {
                 const geoLocate = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK&q=${position.coords.latitude},${position.coords.longitude}`)
                 const apiKey = await geoLocate.json()
@@ -30,7 +29,6 @@ function Weather({ user }) {
                 setTemp(current_weather[0].Temperature.Imperial.Value)
                 setWeatherIcon(current_weather[0].WeatherIcon)
             });
-        }
     }, []);
 
 
