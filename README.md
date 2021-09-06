@@ -1,135 +1,52 @@
-# Flask React Project
+# On Course
+*By Brad Sherwood - [Visit On Course](https://on-course-app.herokuapp.com/splash)*
 
-This is the starter for the Flask React project.
+**Table of Contents**
+* [On Course at a Glance](#oncourse-at-a-glance)
+* [Application Architecture & Technologies Used](#application-architecture)
+* [Frontend Overview](#frontend-overview)
+* [Backend Overview](#backend-overview)
+* [Conclusion & Next Steps](#conclusion-and-next-steps)
 
-## Getting started
+## On Course at a Glance
+On Course is a fullstack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets pilots find and rent aircraft at their airport.
 
-1. Clone this repository (only this branch)
+Users can also list their aircraft available for rent on the app.
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
 
-2. Install dependencies
+## Application Architecture
+As noted above, On Course is a fullstack MERN application. The majority of the application logic occurs within front end's [Redux](https://redux.js.org/) store.
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+The backend serves the frontend, responds to frontend requests, and interacts with the postgresql database. The backend works off a [Python](https://www.python.org/) framework called [flask](https://flask.palletsprojects.com/en/2.0.x/)
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+## Frontend Overview
+On Course uses a [React-Redux](https://react-redux.js.org/) frontend framework to create a responsive and smooth user experience. The use of Redux allows all api calls to the backend to happen seamless, and update the apps content in a smooth fashion.
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+### Frontend Technologies Used:
+#### React
+React is used to provide the JSX that is used to serve the clients requests. Much of react was used within On Course, utilizing props, and state to full effect. This allows for a superior user experience that most other front end frameworks can't provide.
 
-   ```bash
-   pipenv shell
-   ```
+#### Redux
+[Redux](https://redux.js.org/) and the [react-redux](https://react-redux.js.org/) library were used to manage application state and make fetch requests to the server for data.
 
-   ```bash
-   flask db upgrade
-   ```
+Redux stores and sets information about the users flights and aircraft. When in the dashboard the flight component and aircraft component both use the store to grab that information. With the store the app can have easy access to any information about the users flights, or aircraft.
 
-   ```bash
-   flask seed all
-   ```
+#### Auto display of aircraft
+The flight form component has a feature where once you select an airport, all the aircraft available for rent at that airport are then displayed. This feature uses a special api call once an airport is selected to create a list of all aircrafts base airport. Once that list is created another api call is made to receive all aircraft at the selected airport.
 
-   ```bash
-   flask run
-   ```
+## Backend Overview
+On Course's backend works off a [Python](https://www.python.org/) framework called [flask](https://flask.palletsprojects.com/en/2.0.x/). Flask routes api calls and runs the server, while [SQLAlchemy](https://www.sqlalchemy.org/) interacts with the [postgresql](https://www.postgresql.org/) database.
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+### Backend Technologies Used
+#### Flask
+Flask is a Python module which allows the creation of backend servers. Traditionally used to serve [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) templates, On Course uses it to route api called and interact with the database.
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
+#### SQLAlchemy
+On Course uses [SQLAlchemy](https://www.sqlalchemy.org/) as its ORM. It is used to interact with the database, whenever a new user, aircraft, or flight is created SQLAlchemy is used to create that instance in the database. It allows all instances to be represented as dictionaries, and easily created, modified, or deleted.
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
+## Conclusion and Next Steps
+On Course was an amazing experience, after earning my pilots licence in highschool it was a great opportunity  to combine both of my passions into one project. This project was so much fun to make, pulling on my experience in aviation.
 
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+**Next Steps:** Next steps for On Course are to implement third party apis. I want to implement the google maps api for flights, as well as weather information from various api calls.
 
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-# OnCourse
+Thanks for reading! ✌🏽

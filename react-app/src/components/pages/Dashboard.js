@@ -29,7 +29,7 @@ function Dashboard() {
                 </div>
             </div>
             <div>
-                <Weather />
+                <Weather user={user}/>
             </div>
             <div>
                 <Flights user={user} />
