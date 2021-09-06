@@ -10,9 +10,19 @@ aircraft_routes = Blueprint('aircraft', __name__)
 @aircraft_routes.route('/')
 @login_required
 def aircraft_all():
-    print('in Route')
     aircrafts = Aircraft.query.all()
     return {'aircraft': [aircraft.to_dict() for aircraft in aircrafts]}
+
+
+@aircraft_routes.route('/airports')
+@login_required
+def airports():
+    aircrafts = Aircraft.query.all()
+    airports = []
+    for aircraft in aircrafts:
+      if aircraft.airport not in airports:
+        airports.append(aircraft.airport)
+    return {'airports': airports}
 
 
 @aircraft_routes.route('/user/<int:id>')

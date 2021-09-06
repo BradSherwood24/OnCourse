@@ -91,9 +91,9 @@ function SingleAircraft() {
             <button onClick={e => setUpdate(!update)}>
               Edit
             </button>
-            <button onClick={e => setAdd(!add)}>
+            {/* <button onClick={e => setAdd(!add)}>
               Add Images
-            </button>
+            </button> */}
             {update &&
               <AircraftForm aircraft={aircraft} user={user} closeForm={closeForm} />
             }
