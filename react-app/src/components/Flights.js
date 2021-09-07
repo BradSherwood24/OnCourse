@@ -61,7 +61,7 @@ function Flights({ user }) {
                 <FlightForm user={user} closeForm={closeForm} />
             }
             {flight.id &&
-                <SingleFlight flight={flight} closeForm={closeForm} />
+                <SingleFlight flight={flight} closeForm={closeForm} user={user} />
             }
             <div className='List'>
                 {flightList}

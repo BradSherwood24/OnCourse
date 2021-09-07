@@ -76,3 +76,12 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
+
+.links_splash {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.links_splash > a{
+    color: black;
+}

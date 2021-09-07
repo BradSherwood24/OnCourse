@@ -17,6 +17,7 @@ const FlightForm = ({ user, flight, closeForm }) => {
     const [distance, setDistance] = useState('')
     const dispatch = useDispatch();
 
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
@@ -89,8 +90,12 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
     const selectAircraft = aircraftList.map((aircraft) => {
         return (
-            <div key={aircraft.id} onClick={() => setAircraft_id(aircraft.id)}>
-                <img className='flight_form_aircraft_img' src={aircraft.cover_img}></img>
+            <div key={aircraft.id} className={aircraft.id === aircraft_id? `flight_form_aircraft_div_active`: 'flight_form_aircraft_div'} onClick={() => setAircraft_id(aircraft.id)}>
+                <img className={'flight_form_aircraft_img'} src={aircraft.cover_img}></img>
+                <div>
+                <h2>{aircraft.tail_number}</h2>
+                <h3>${aircraft.price}/h</h3>
+                </div>
             </div>
         )
     })

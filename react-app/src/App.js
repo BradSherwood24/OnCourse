@@ -51,7 +51,7 @@ function App() {
           <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <Redirect to='/dashboard' />;
+          <Redirect to='/splash' />;
         </ProtectedRoute>
         <Route path='/splash' exact={true} >
           <Splash />

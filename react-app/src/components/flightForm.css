@@ -19,3 +19,16 @@
     width: 100px;
     height: 65px;
 }
+
+.flight_form_aircraft_div {
+    display: flex;
+}
+
+.flight_form_aircraft_div:hover {
+    cursor: pointer;
+}
+
+.flight_form_aircraft_div_active {
+    display: flex;
+    border: 3px solid black;
+}
