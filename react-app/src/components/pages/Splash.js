@@ -35,8 +35,11 @@ function Splash() {
             </div>
             <div className='links_splash'>
                 <h2>Links</h2>
-                <a href='https://github.com/BradSherwood24/OnCourse'>github project</a>
-                <a href='https://github.com/BradSherwood24'>github profile</a>
+                <ul>
+                    <li><a href='https://github.com/BradSherwood24/OnCourse'>Github Project</a></li>
+                    <li><a href='https://github.com/BradSherwood24'>Github Profile</a></li>
+                    <li><a href='https://www.linkedin.com/in/bradley-sherwood-36a92615a/'>Linkedin profile</a></li>
+                </ul>
             </div>
 
         </div>
