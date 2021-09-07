@@ -27,6 +27,10 @@ function SingleFlight({ flight, closeForm, user }) {
     const [airportLists, setAirportList] = useState([])
     const airports = flight.airports
 
+    const close = () => {
+        setUpdateFlightInfo(false)
+    }
+
     useEffect(() => {
         setName(flight.name)
     }, [flight])
@@ -246,7 +250,7 @@ function SingleFlight({ flight, closeForm, user }) {
                             </input>
                         </div>
                         <button type='submit'>submit</button>
-                        <button onClick={closeForm}>close</button>
+                        <button onClick={close}>close</button>
                     </form>
                 // </div>
                 }
