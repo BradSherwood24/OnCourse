@@ -171,9 +171,9 @@ function SingleFlight({ flight, closeForm, user }) {
                 }
                 {updateFlightInfo &&
                     // <FlightForm flight={flight} user={user} closeForm={close} />
-                    <div className='flight_form_div'>
-                    <form onSubmit={e => submit_update(e)} className='flight_form'>
-                        <h1>New Flight</h1>
+                    // <div className='flight_form_div_no_background'>
+                    <form onSubmit={e => submit_update(e)} className='flight_form_no_fixed'>
+                        <h1>Update Flight</h1>
                         <div>
                             {errors.map((error, ind) => (
                                 <div key={ind}>{error}</div>
@@ -248,7 +248,7 @@ function SingleFlight({ flight, closeForm, user }) {
                         <button type='submit'>submit</button>
                         <button onClick={closeForm}>close</button>
                     </form>
-                </div>
+                // </div>
                 }
             </div>
         </div>
