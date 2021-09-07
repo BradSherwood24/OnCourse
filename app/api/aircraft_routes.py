@@ -109,6 +109,8 @@ def Update(id):
   aircraft.price=data['price']
   aircraft.manufacturer=data['manufacturer']
   aircraft.name=data['name']
+  aircraft.year=data['year']
+  aircraft.tail_number=data['tail_number']
   aircraft.description=data['description']
   aircraft.cover_img=data['cover_img']
   aircraft.avionics=data['avionics']
