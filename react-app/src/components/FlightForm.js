@@ -90,7 +90,7 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
     const selectAircraft = aircraftList.map((aircraft) => {
         return (
-            <div key={aircraft.id} className={aircraft.id === aircraft_id ? `flight_form_aircraft_div_active` : 'flight_form_aircraft_div'} onClick={() =>aircraft.id === aircraft_id ? setAircraft_id(0) : setAircraft_id(aircraft.id)}>
+            <div key={aircraft.id} className={aircraft.id === aircraft_id ? `flight_form_aircraft_div_active` : 'flight_form_aircraft_div'} onClick={() => aircraft.id === aircraft_id ? setAircraft_id(0) : setAircraft_id(aircraft.id)}>
                 <img className={'flight_form_aircraft_img'} src={aircraft.cover_img}></img>
                 <div>
                     <h2>{aircraft.tail_number}</h2>
@@ -108,7 +108,10 @@ const FlightForm = ({ user, flight, closeForm }) => {
         <>
             <div className='flight_form_div'>
                 <form onSubmit={e => onSubmit(e)} className='flight_form'>
-                    <h1>New Flight</h1>
+                    <div className='new_flight_header'>
+                        <h1>New Flight</h1>
+                        <button className='new_flight_close' onClick={closeForm}>X</button>
+                    </div>
                     <div>
                         {errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
@@ -183,7 +186,6 @@ const FlightForm = ({ user, flight, closeForm }) => {
                         </input>
                     </div>
                     <button type='submit'>submit</button>
-                    <button onClick={closeForm}>close</button>
                 </form>
             </div>
         </>

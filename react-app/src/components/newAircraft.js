@@ -149,11 +149,11 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
     return (
         <div className='aircraft_form_div'>
             <form onSubmit={e => onSubmit(e)} className='aircraft_form'>
-            <button
-                onClick={closeForm}
-                className='closeButton'>X</button>
                 <div className='form-header'>
                     <h1>New Aircraft</h1>
+                    <button
+                        onClick={closeForm}
+                        className='closeButton'>X</button>
                 </div>
                 <div className='inside_form'>
                     <div>
