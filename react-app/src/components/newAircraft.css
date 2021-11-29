@@ -31,3 +31,13 @@
 .description-textarea {
     width: 90%;
 }
+
+.form-header {
+    display: flex;
+
+}
+
+.closeButton {
+    padding-right: 0px;
+    width: 50px;
+}
