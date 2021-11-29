@@ -1,6 +1,8 @@
 # On Course
 *By Brad Sherwood - [Visit On Course](https://on-course-app.herokuapp.com/splash)*
 
+[<img src="https://ibb.co/Ykx8jNX">]
+
 **Table of Contents**
 * [On Course at a Glance](#oncourse-at-a-glance)
 * [Application Architecture & Technologies Used](#application-architecture)
