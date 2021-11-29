@@ -27,3 +27,7 @@
 .inside_form {
     display: flex;
 }
+
+.description-textarea {
+    width: 90%;
+}

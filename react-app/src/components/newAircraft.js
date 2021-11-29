@@ -158,7 +158,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             ))}
                         </div>
                         <div>
-                            <label>price per hour</label>
+                            <label>Price per Hour</label>
                             <input
                                 type='number'
                                 onChange={e => setPrice(e.target.value)}
@@ -167,7 +167,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>manufacturer</label>
+                            <label>Manufacturer</label>
                             <input
                                 type='text'
                                 onChange={e => setManufacturer(e.target.value)}
@@ -176,7 +176,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>name</label>
+                            <label>Model</label>
                             <input
                                 type='text'
                                 onChange={e => setName(e.target.value)}
@@ -185,7 +185,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>year</label>
+                            <label>Year</label>
                             <input
                                 type='number'
                                 onChange={e => setYear(e.target.value)}
@@ -194,7 +194,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>tail Number</label>
+                            <label>Tail Number</label>
                             <input
                                 type='text'
                                 onChange={e => setTail_number(e.target.value)}
@@ -203,13 +203,16 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>description</label>
-                            <input
+                            <div>
+                                <label>Description</label>
+                            </div>
+                            <textarea
                                 type='text'
                                 onChange={e => setDescription(e.target.value)}
                                 value={description}
+                                className="description-textarea"
                             >
-                            </input>
+                            </textarea>
                         </div>
                         <div>
                             <label>Cover Image</label>
@@ -221,7 +224,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>avionics</label>
+                            <label>Avionics</label>
                             <input
                                 type='text'
                                 onChange={e => setAvionics(e.target.value)}
@@ -230,7 +233,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>airport</label>
+                            <label>Airport</label>
                             <input
                                 type='text'
                                 onChange={e => setAirport(e.target.value)}
@@ -239,7 +242,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>Link to poh</label>
+                            <label>Link to POH</label>
                             <input
                                 type='text'
                                 onChange={e => setpoh(e.target.value)}
@@ -247,21 +250,24 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             >
                             </input>
                         </div>
+                    </div>
+                    <div>
+                        <h3>Performance</h3>
                         <div>
-                            <label>type</label>
+                            <label>Type</label>
                             <select
                                 onChange={e => setType(e.target.value)}
                                 value={type}
                             >
-                                <option value='single-engine land'>single-engine land</option>
-                                <option value='multi-engine land'>multi-engine land</option>
-                                <option value='single-engine sea'>single-engine sea</option>
-                                <option value='multi-engine sea'>multi-engine sea</option>
-                                <option value='Rotar'>Rotar</option>
+                                <option value='single-engine land'>Single-Engine Land</option>
+                                <option value='multi-engine land'>Multi-Engine Land</option>
+                                <option value='single-engine sea'>Single-Engine Sea</option>
+                                <option value='multi-engine sea'>Multi-Engine Sea</option>
+                                <option value='rotor'>Rotor Craft</option>
                             </select>
                         </div>
                         <div>
-                            <label>gallons per hour</label>
+                            <label>Gallons Per Hour</label>
                             <input
                                 type='number'
                                 onChange={e => setgph(e.target.value)}
@@ -270,7 +276,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>fuel capacity</label>
+                            <label>fuel Capacity</label>
                             <input
                                 type='number'
                                 onChange={e => setFuel_capacity(e.target.value)}
@@ -279,7 +285,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>cruise speed</label>
+                            <label>Cruise speed</label>
                             <input
                                 type='number'
                                 onChange={e => setCruise_speed(e.target.value)}
@@ -288,7 +294,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>usable load</label>
+                            <label>Usable Load</label>
                             <input
                                 type='number'
                                 onChange={e => setUsable_load(e.target.value)}
@@ -297,7 +303,7 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             </input>
                         </div>
                         <div>
-                            <label>seats</label>
+                            <label>Seats</label>
                             <input
                                 type='number'
                                 onChange={e => setSeats(e.target.value)}
@@ -314,8 +320,11 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             >
                             </input>
                         </div>
+                        <button type='submit'>submit</button>
+                        <button onClick={closeForm}>close</button>
                     </div>
-                    <div>
+                </div>
+                {/* <div>
                         <h3>Requirements to fly</h3>
                         <div>
                             <label>Need Instrument Rating</label>
@@ -398,10 +407,10 @@ const AircraftForm = ({ user, aircraft, closeForm }) => {
                             >
                             </input>
                         </div>
-                        <button type='submit'>submit</button>
-                        <button onClick={closeForm}>close</button>
-                    </div>
-                </div>
+                    <button type='submit'>submit</button>
+                    <button onClick={closeForm}>close</button>
+                    </div> */}
+                {/* </div> */}
             </form>
         </div>
     );
