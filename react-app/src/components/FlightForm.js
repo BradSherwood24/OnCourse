@@ -90,7 +90,7 @@ const FlightForm = ({ user, flight, closeForm }) => {
 
     const selectAircraft = aircraftList.map((aircraft) => {
         return (
-            <div key={aircraft.id} className={aircraft.id === aircraft_id ? `flight_form_aircraft_div_active` : 'flight_form_aircraft_div'} onClick={() => setAircraft_id(aircraft.id)}>
+            <div key={aircraft.id} className={aircraft.id === aircraft_id ? `flight_form_aircraft_div_active` : 'flight_form_aircraft_div'} onClick={() =>aircraft.id === aircraft_id ? setAircraft_id(0) : setAircraft_id(aircraft.id)}>
                 <img className={'flight_form_aircraft_img'} src={aircraft.cover_img}></img>
                 <div>
                     <h2>{aircraft.tail_number}</h2>
@@ -124,7 +124,9 @@ const FlightForm = ({ user, flight, closeForm }) => {
                         </input>
                     </div>
                     <div>
-                        <label>select departing airport</label>
+                        <div>
+                            <label>select departing airport</label>
+                        </div>
                         <select
                             type='text'
                             onChange={e => setDepartingAirport(e.target.value)}

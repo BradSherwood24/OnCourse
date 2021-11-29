@@ -17,7 +17,9 @@
 
 .flight_form_aircraft_img {
     width: 100px;
-    height: 65px;
+    height: 70px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 .flight_form_aircraft_div {
@@ -28,7 +30,19 @@
     cursor: pointer;
 }
 
+.flight_form_aircraft_div_active:hover {
+    cursor: pointer;
+}
+
 .flight_form_aircraft_div_active {
     display: flex;
+    width: 80%;
     border: 3px solid black;
+    border-radius: 30px;
+}
+
+.flight_form_aircraft_div {
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 30px;
 }
