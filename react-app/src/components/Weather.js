@@ -11,7 +11,7 @@ import { WiThermometer } from "react-icons/wi";
 import { WiThermometerExterior } from "react-icons/wi";
 import { refresh } from '../store/session';
 import './weather.css'
-import staticRadar from '../images/staticRadar.png'
+import staticRadar from '../images/radar2.png'
 
 function Weather({ user }) {
     const dispatch = useDispatch()

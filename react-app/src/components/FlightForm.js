@@ -108,7 +108,7 @@ const FlightForm = ({ user, flight, closeForm }) => {
         <>
             <div className='flight_form_div'>
                 <form onSubmit={e => onSubmit(e)} className='flight_form'>
-                    <h1>New Flight !!!!!!</h1>
+                    <h1>New Flight</h1>
                     <div>
                         {errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
