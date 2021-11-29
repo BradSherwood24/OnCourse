@@ -72,7 +72,7 @@ function Weather({ user }) {
                 <h2 className='weather_temp'>{temp}°</h2>
             </div>
             <div className='weather_radar_div'>
-                <img className='weather_radar_img' src={staticRadar}></img>
+                {/* <img className='weather_radar_img' src={staticRadar}></img> */}
             </div>
 
         </div>
