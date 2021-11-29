@@ -25,7 +25,6 @@ function Weather({ user }) {
                 const apiKey = await geoLocate.json()
                 const weather = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${apiKey.Key}?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK`)
                 const current_weather = await weather.json()
-                console.log(current_weather)
                 setTemp(current_weather[0].Temperature.Imperial.Value)
                 setWeatherIcon(current_weather[0].WeatherIcon)
             });
