@@ -11,7 +11,7 @@ import { WiThermometer } from "react-icons/wi";
 import { WiThermometerExterior } from "react-icons/wi";
 import { refresh } from '../store/session';
 import './weather.css'
-import staticRadar from '../images/staticRadar.png'
+import staticRadar from '../images/radar2.png'
 
 function Weather({ user }) {
     const dispatch = useDispatch()
@@ -21,11 +21,11 @@ function Weather({ user }) {
 
     useEffect(async () => {
             navigator.geolocation.getCurrentPosition(async function (position) {
-                const geoLocate = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK&q=${position.coords.latitude},${position.coords.longitude}`)
+                // const geoLocate = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK&q=${position.coords.latitude},${position.coords.longitude}`)
+                const geoLocate = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK&q=42.978387,-86.2200089`)
                 const apiKey = await geoLocate.json()
                 const weather = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${apiKey.Key}?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK`)
                 const current_weather = await weather.json()
-                console.log(current_weather)
                 setTemp(current_weather[0].Temperature.Imperial.Value)
                 setWeatherIcon(current_weather[0].WeatherIcon)
             });
@@ -72,7 +72,7 @@ function Weather({ user }) {
                 <h2 className='weather_temp'>{temp}°</h2>
             </div>
             <div className='weather_radar_div'>
-                <img className='weather_radar_img' src={staticRadar}></img>
+                {/* <img className='weather_radar_img' src={staticRadar}></img> */}
             </div>
 
         </div>

@@ -15,6 +15,8 @@
     border: 2px solid rgb(0, 0, 83);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     box-shadow: 5px 5px 5px  rgba(0, 0, 0, .7);
 }
 
@@ -41,8 +43,4 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     box-shadow: 5px 5px 5px  rgba(0, 0, 0, .7);
-}
-
-.weather_radar_div {
-
 }

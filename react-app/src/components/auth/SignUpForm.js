@@ -32,7 +32,7 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
-    }else {
+    } else {
       setErrors(['Passwords do not match'])
     }
   };
@@ -68,7 +68,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>Email</label>
+          <div>
+            <label>Email</label>
+          </div>
           <input
             type='text'
             name='email'

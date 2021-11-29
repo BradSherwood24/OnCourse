@@ -16,7 +16,6 @@
     left: 30%;
     max-width: 900px;
     max-height: 900px;
-    overflow-y: scroll;
 }
 
 .aircraft_form > div {
@@ -26,4 +25,18 @@
 
 .inside_form {
     display: flex;
+}
+
+.description-textarea {
+    width: 90%;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeButton {
+    width: 50px;
+    
 }
