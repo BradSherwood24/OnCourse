@@ -28,14 +28,15 @@ function Weather({ user }) {
             //     setTemp(current_weather[0].Temperature.Imperial.Value)
             //     setWeatherIcon(current_weather[0].WeatherIcon)
             // });
-            if(temp === '') {
+
                  const geoLocate = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK&q=42.978387,-86.2200089`)
                  const apiKey = await geoLocate.json()
                  const weather = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${apiKey.Key}?apikey=BkLN6NrIOv12CwE61N5G5m6dFaZWlUtK`)
                  const current_weather = await weather.json()
+                 console.log("current weather", current_weather, apiKey)
                  setTemp(current_weather[0].Temperature.Imperial.Value)
                  setWeatherIcon(current_weather[0].WeatherIcon)
-            }
+
     }, []);
 
 
